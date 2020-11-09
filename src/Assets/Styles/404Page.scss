@@ -1,0 +1,18 @@
+@import "./mixins";
+@import "./variables";
+
+.not-found-wrapper {
+  @include absoluteCentered();
+  text-align: center;
+  border: 1px solid $violet;
+  border-top: none;
+  border-bottom: none;
+  padding: 5px;
+  h1 {
+    color: $dark-blue-primary;
+  }
+  a {
+    color: $violet;
+    text-decoration: none;
+  }
+}

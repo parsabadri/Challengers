@@ -1,0 +1,67 @@
+@import "./mixins";
+@import "./variables";
+
+.account {
+  .content {
+    span {
+      @include section-border-bottom();
+      width: 100%;
+    }
+    .grid {
+      display: grid;
+      align-self: stretch;
+      padding-left: 1%;
+      p {
+        margin: 0;
+      }
+      p:first-child {
+        font-family: Lato-bold;
+        color: $dark-blue-primary;
+        font-size: 16px;
+      }
+      p:last-child {
+        color: $grey !important;
+        font-size: 15px;
+        // font-size: small;
+      }
+    }
+    h2 {
+      color: $dark-blue-primary;
+      font-family: Lato-light;
+      font-weight: 500;
+      margin-top: 0;
+    }
+    img {
+      width: 56px;
+      height: 56px;
+    }
+    .header {
+      margin-left: 1%;
+      span {
+        @include section-border-bottom();
+        width: 100%;
+      }
+    }
+    .row {
+      p:first-child {
+        color: $dark-blue-primary;
+        width: 30%;
+        font-size: 16px;
+      }
+      p:last-child {
+        color: $dark-blue-primary;
+        font-family: Lato-bold;
+      }
+    }
+    .body {
+      .flex:last-child {
+        p {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  .edit-btn {
+    @include Purple-btn();
+  }
+}

@@ -1,0 +1,82 @@
+@import "./variables";
+@import "./mixins";
+
+.auth-wrapper {
+  background-color: $white-background;
+  display: flex;
+  justify-content: center;
+  border-radius: 30px;
+  transition-duration: $smooth;
+  @include absoluteCentered();
+  img {
+    width: 500px;
+    height: 500px;
+  }
+  .ResetPWDvector {
+    margin: 25px;
+    width: 450px;
+    height: 450px;
+  }
+  div {
+    width: 250px;
+    padding: 40px;
+
+    section {
+      margin-bottom: 35%;
+    }
+
+    form {
+      display: grid;
+      p {
+        background-color: transparent;
+        color: $hint-text-color;
+        font-family: Lato-light;
+        font-size: $hint-text-size;
+      }
+      h5 {
+        font-weight: 600;
+        font-size: 21px;
+        color: $dark-blue-primary;
+        margin: 0;
+      }
+      input {
+        @include input();
+        margin: 4% 0;
+        transition: 0.4s;
+      }
+      input:focus {
+        border: 1px solid $violet;
+        outline: none;
+      }
+
+      a {
+        color: $violet;
+        text-decoration: none;
+        margin: 1% 0;
+      }
+      button {
+        width: 154px;
+        height: 43px;
+        display: block;
+        margin: 6% auto 0 0;
+        border-radius: 10px;
+        background-color: $violet;
+        color: white;
+        border: none;
+        font-size: 16px;
+      }
+    }
+  }
+}
+@media screen and (max-width: $mobile) {
+  .auth-wrapper {
+    @include fullScreenMobile();
+    img {
+      display: none;
+    }
+    div {
+      width: 100%;
+      padding: 20px;
+    }
+  }
+}

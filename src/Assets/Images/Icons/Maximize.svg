@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+    <defs>
+        <filter id="roo4mpfxfa">
+            <feColorMatrix in="SourceGraphic" values="0 0 0 0 0.192157 0 0 0 0 0.243137 0 0 0 0 0.364706 0 0 0 1.000000 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <g filter="url(#roo4mpfxfa)" transform="translate(-68 -629) translate(47 79) translate(0 181) translate(0 348)">
+                        <g>
+                            <path stroke="#7F35FE" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.334.75H5.665C2.645.75.75 2.89.75 5.916v8.168c0 3.027 1.885 5.166 4.915 5.166h8.668c3.031 0 4.917-2.139 4.917-5.166V5.916C19.25 2.89 17.364.75 14.334.75z" transform="translate(21 21)"/>
+                            <g fill="#000" fill-rule="nonzero">
+                                <g>
+                                    <path d="M6.042 8.334H.625C.28 8.334 0 8.054 0 7.709V2.292c0-.345.28-.625.625-.625s.625.28.625.625v4.792h4.792c.345 0 .625.28.625.625s-.28.625-.625.625z" transform="translate(21 21) translate(1 2.333) rotate(180 8.167 4.5)"/>
+                                    <path d="M.625 8.334c-.16 0-.32-.06-.442-.183-.244-.245-.244-.64 0-.884L7.267.183c.244-.244.64-.244.884 0s.244.64 0 .884L1.068 8.151c-.123.122-.283.183-.443.183z" transform="translate(21 21) translate(1 2.333) rotate(180 8.167 4.5)"/>
+                                </g>
+                                <path d="M6.875 16.667c-.345 0-.625-.28-.625-.625v-5.625H.625c-.345 0-.625-.28-.625-.625s.28-.625.625-.625h6.25c.345 0 .625.28.625.625v6.25c0 .345-.28.625-.625.625z" transform="translate(21 21) translate(1 2.333)"/>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,174 @@
+@import "./mixins";
+@import "./variables";
+
+.home-wrapper {
+  display: inline-block;
+  width: 77%;
+  margin: 0 0 0 3%;
+  height: 100vh;
+  .dashboard-header {
+    color: $dark-blue-primary;
+    margin: 4% 0;
+    h2 {
+      font-family: Lato-bold;
+      margin-bottom: 1%;
+    }
+    p {
+      margin: 0;
+      font-family: Lato-light;
+    }
+  }
+  h1 {
+    @include Card();
+  }
+  .small-chart:first-child {
+    margin-left: 0;
+  }
+  .small-chart {
+    @include Card();
+    margin: 1% 2%;
+    h2 {
+      color: $dark-blue-primary;
+      text-align: center;
+      font-family: lato-light;
+      margin-top: 0;
+    }
+    h3 {
+      font-family: Lato-bold;
+      color: $dark-blue-primary;
+      text-align: center;
+    }
+    .chart-info {
+      display: grid;
+      align-items: center;
+      padding-left: 30px;
+      .yellow-circle {
+        @include SmallCircle();
+        background-color: $pie-yellow;
+      }
+      .pink-circle {
+        @include SmallCircle();
+        background-color: $pie-pink;
+      }
+      .blue-circle {
+        @include SmallCircle();
+        background-color: $pie-blue;
+      }
+      div {
+        width: 85%;
+        justify-content: space-between;
+        align-items: center;
+        margin: 2% 0;
+      }
+      p {
+        color: $dark-blue-primary;
+        display: block;
+        margin: auto;
+        margin-left: 0;
+        align-self: center;
+        font-family: Lato-light;
+      }
+      p:last-child {
+        font-family: Lato-bold;
+        display: block;
+        margin: auto;
+        margin-right: 0;
+      }
+    }
+  }
+  .content {
+    @include Card();
+    margin-top: 3%;
+    h2 {
+      color: $dark-blue-primary;
+      font-family: lato-light;
+      margin-left: 6%;
+    }
+    .barchart-wrapper {
+      display: block;
+      margin: auto;
+      width: 600px;
+      h3 {
+        color: $dark-blue-primary;
+        font-family: Lato-bold;
+        text-align: center;
+        align-self: center;
+      }
+    }
+  }
+  .inline-block {
+    width: 50%;
+  }
+  .inline-block:last-child {
+    width: 35%;
+    margin: auto 4% auto auto;
+    .flex {
+      align-items: center;
+      height: 35px;
+      p {
+        font-family: Lato-light;
+        font-size: large;
+        color: $dark-blue-primary;
+      }
+    }
+  }
+}
+.yellow-circle {
+  @include SmallCircle();
+  background-color: $pie-yellow;
+}
+.pink-circle {
+  @include SmallCircle();
+  background-color: $pie-pink;
+}
+.blue-circle {
+  @include SmallCircle();
+  background-color: $pie-blue;
+}
+.filter {
+  display: grid;
+  .sinlge-select {
+    @include Select();
+    width: 50%;
+    margin: auto auto auto 6%;
+  }
+  select:focus {
+    outline: none;
+  }
+  p {
+    color: $dark-blue-primary;
+    margin: 0 auto 2% 6%;
+    font-family: Lato-bold;
+  }
+}
+.job-role {
+  display: block;
+  margin-bottom: 3%;
+  h2 {
+    margin-left: 3% !important;
+  }
+  .double-filters {
+    display: flex;
+    padding: 0 1%;
+    .filter {
+      width: 29%;
+    }
+  }
+  .double-select {
+    @include Select();
+    width: 95%;
+    margin: auto auto auto 6%;
+  }
+  .complex-chart {
+    display: flex;
+    .small-pie {
+      display: inline-block;
+      margin: auto 0 auto;
+      h3 {
+        color: $dark-blue-primary;
+        text-align: center;
+        font-family: Lato-bold;
+      }
+    }
+  }
+}

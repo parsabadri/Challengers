@@ -1,0 +1,111 @@
+@import "./variables";
+@import "./mixins";
+.progress {
+  .setup-report {
+    font-style: italic;
+    color: $dark-blue-primary;
+    text-align: center;
+    font-weight: 600;
+    font-size: small;
+  }
+}
+.progress-bar {
+  display: flex;
+  margin: auto;
+  width: 70%;
+  #step1 {
+    display: flex;
+    margin: auto;
+    width: 30%;
+  }
+  #step2 {
+    display: flex;
+    margin: auto;
+    width: 30%;
+  }
+  .step {
+    display: block;
+    margin: auto;
+    width: 45%;
+    text-align: center;
+  }
+  p {
+    @include StepName();
+  }
+  #progress-line1 {
+    @include midline();
+    margin: 0 -8% 35% -2%;
+  }
+  #progress-line2 {
+    @include midline();
+    margin: 0 -13% 35% -4%;
+  }
+  .progress-line-mid {
+    @include ProgressLine();
+  }
+}
+.line {
+  width: 100%;
+  margin: 2px -3% 0 -1.6%;
+}
+.step-section {
+  display: inline-block;
+  margin: 0 auto 0 0;
+  width: 50%;
+  color: $dark-blue-primary;
+  padding-left: 5%;
+  h2 {
+    font-weight: normal;
+    margin: 0;
+  }
+  .double-action-btn {
+    @include Transparent-purple-btn();
+    transition-duration: 0.4s;
+  }
+  .double-action-btn:first-child {
+    margin: 1% auto 1% 0;
+    display: inline-block;
+    width: 40%;
+  }
+  .double-action-btn:last-child {
+    margin: 1% 0 1% auto;
+    display: inline-block;
+    width: 57%;
+  }
+  // .double-action-btn:hover {
+  //   @include Purple-btn();
+  // }
+  .single-action-btn {
+    @include Transparent-purple-btn();
+    display: inline-block;
+    margin: 1% auto 1% 0;
+    transition-duration: 0.4s;
+  }
+  // .single-action-btn:hover {
+  //   @include Purple-btn();
+  // }
+  .bold-info-text {
+    font-family: Lato-italic-bold;
+  }
+}
+.step-section:last-child {
+  margin-right: 3%;
+  width: 46%;
+  .double-action-btn-purple {
+    @include Purple-btn();
+    transition-duration: 0.4s;
+  }
+  .double-action-btn-purple:first-child {
+    margin: 1% auto 1% 0;
+    display: inline-block;
+    width: 40%;
+  }
+  .double-action-btn-purple:last-child {
+    margin: 1% 0 1% auto;
+    display: inline-block;
+    width: 57%;
+  }
+  // .double-action-btn-purple:hover {
+  //   @include Transparent-purple-btn();
+  // }
+}
