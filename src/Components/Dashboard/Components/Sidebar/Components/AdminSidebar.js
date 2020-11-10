@@ -26,6 +26,7 @@ const AdminSidebar = (props) => {
         "rotate(180deg)";
       document.getElementById("sidebar").classList.add("sidebar-minimiezd");
     } else {
+      document.getElementById("sidebar").style.transitionDelay = "0";
       document.getElementById("sidebar").style.width = "291px";
       document.getElementById("minimize-icon").style.transform = "none";
       document.getElementById("sidebar").classList.remove("sidebar-minimiezd");

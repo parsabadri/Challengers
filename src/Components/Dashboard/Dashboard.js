@@ -8,59 +8,11 @@ import axios from "axios";
 
 const Dashboard = () => {
   const [UserRole, setUserRole] = useState("");
-  const [IsFirstLogin, setIsFirstLogin] = useState(false);
   //this part is not complete and probably won't be here(change asap)
   useEffect(() => {
     let token = window.localStorage.getItem("token");
     parseJwt(token);
-    if (UserRole === "ROLE_ADMIN") {
-      getAdminMenu();
-    } else if (UserRole === "ROLE_SUPER_ADMIN") {
-      getSuAdminMenu();
-    }
-  }, [UserRole, IsFirstLogin]);
-  const getAdminMenu = () => {
-    let req = {
-      method: "GET",
-      url: config.baseURL + "/rest/admin/menus/getMenus",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + window.localStorage.getItem("token"),
-      },
-    };
-    axios(req)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  const getSuAdminMenu = () => {
-    let req = {
-      method: "GET",
-      url: config.baseURL + "/rest/superadmin/menus/getMenus",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + window.localStorage.getItem("token"),
-      },
-    };
-    axios(req)
-      .then((res) => {
-        console.log(res);
-        if (res.data.data.menus[0].mainPage === true) {
-          document.getElementById("ml-link").click();
-          setIsFirstLogin(true);
-        } else if (res.data.data.menus[2].mainPage === true) {
-          document.getElementById("home-link").click();
-          setIsFirstLogin(false);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
+  }, [UserRole]);
   //this function recieves and decodes the token then returns a JSON file in order to get user Role
   //we get the user role and set it as component state accordingly.
   function parseJwt(token) {

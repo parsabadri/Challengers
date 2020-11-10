@@ -3,24 +3,31 @@ import ResetPassVector from "../../Assets/Images/Vectors/ForgotPassword.svg";
 import "../../Assets/Styles/Auth.scss";
 import axios from "axios";
 import { config } from "../../config";
+import { useParams } from "react-router";
 
-const ResetPassword = () => {
-  const requestResetpass = (event) => {
+const Verify = () => {
+  //this parameter is gotten by the use of useParams hook. it is the id of the user whose
+  //identity we want to verify.
+  let { id } = useParams();
+
+  if (!id) {
+    //just to make sure we always have the id
+    return null;
+  }
+
+  const VerifyUserId = (event) => {
     event.preventDefault();
-    let AccountToReset = {
-      email: document.getElementById("email").value,
-    };
+
+    //we define API config and pass the id as a url parameter to request url,
+    //then do the API call using axios
     let req = {
-      method: "POST",
-      url: config.baseURL + "/rest/public/forgotPassword/submitRequest",
-      headers: {
-        "content-type": "application/json",
-      },
-      data: JSON.stringify(AccountToReset),
+      method: "GET",
+      url: config.baseURL + "/rest/public/forgotPassword/verify/" + id,
     };
     axios(req)
       .then((res) => {
         console.log(res);
+        window.alert(res.data.message);
       })
       .catch((err) => {
         console.log(err);
@@ -39,15 +46,14 @@ const ResetPassword = () => {
           <p>PILOT PROJECT</p>
         </section>
         <form>
-          <h5>Forgot Password</h5>
-          <p>Use your provided email to recieve password reset link.</p>
-          <input id="email" placeholder="Email" />
-          <button onClick={(event) => requestResetpass(event)} id="test">
-            Send
+          <h5>Verify your identity</h5>
+          <p> Click the Verify button to proceed. </p>
+          <button onClick={(event) => VerifyUserId(event)} id="test">
+            Verify
           </button>
         </form>
       </div>
     </div>
   );
 };
-export default ResetPassword;
+export default Verify;

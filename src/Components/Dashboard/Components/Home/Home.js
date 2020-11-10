@@ -3,6 +3,7 @@ import "../../../../Assets/Styles/Home.scss";
 import SmallPieChart from "./Components/SmallPieChart";
 import MultiBarChart from "./Components/MultiBarChart";
 import SimpleBarChar from "./Components/SimpleBarChart";
+import { BrowserRouter } from "react-router-dom";
 
 const Home = (props) => {
   const [CompanyData, setCompData] = useState({
@@ -79,127 +80,141 @@ const Home = (props) => {
       amt: 15,
     },
   ]);
+  const [IsFirstLogin, setIsFirstLogin] = useState(false);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (props.IsFirstLogin === true) {
+      setIsFirstLogin(true);
+    } else {
+      setIsFirstLogin(false);
+    }
+  }, []);
+
   return (
-    <div className="home-wrapper">
-      <div className="dashboard-header">
-        <h2>Dashboard</h2>
-        <p>{CompanyData.name}</p>
-      </div>
-      <div className="flex">
-        <div className="small-chart">
-          <h2>Company Attrition</h2>
-          <SmallPieChart data={CompanyAttrition} />
-          <h3>People</h3>
-          <div className="chart-info">
-            <div className="flex">
-              <div className="yellow-circle"></div>
-              <p> {CompanyAttrition[0].name} </p>
-              <p> {Math.round(CompanyAttrition[0].value)} </p>
-            </div>
+    <BrowserRouter>
+      {IsFirstLogin ? (
+        <h1>firsty virgin!</h1>
+      ) : (
+        <div className="home-wrapper">
+          <div className="dashboard-header">
+            <h2>Dashboard</h2>
+            <p>{CompanyData.name}</p>
           </div>
-        </div>
-        <div className="small-chart">
-          <h2>Department Attrition</h2>
-          <SmallPieChart data={DeptAttrition} />
-          <h3>People</h3>
-          <div className="chart-info">
-            <div className="flex">
-              <div className="yellow-circle"></div>
-              <p> {DeptAttrition[0].name} </p>
-              <p> {Math.round(DeptAttrition[0].value)} </p>
-            </div>
-            <div className="flex">
-              <div className="pink-circle"></div>
-              <p> {DeptAttrition[1].name} </p>
-              <p> {Math.round(DeptAttrition[1].value)} </p>
-            </div>
-            <div className="flex">
-              <div className="blue-circle"></div>
-              <p> {DeptAttrition[2].name} </p>
-              <p> {Math.round(DeptAttrition[2].value)} </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="content">
-        <div className="flex">
-          <div className="inline-block">
-            <div className="flex">
-              <h2>Attrition by Age</h2>
-            </div>
-            <div className="filter">
-              <p>Select the age group:</p>
-              <select className="sinlge-select">
-                <option>18 - 25 years old</option>
-                <option>25 - 30 years old</option>
-                <option>30 - 35 years old</option>
-              </select>
-            </div>
-          </div>
-          <div className="inline-block">
-            <div className="flex">
-              <div className="yellow-circle"></div>
-              <p> {DeptAttrition[0].name} </p>
-            </div>
-            <div className="flex">
-              <div className="pink-circle"></div>
-              <p> {DeptAttrition[1].name} </p>
-            </div>
-            <div className="flex">
-              <div className="blue-circle"></div>
-              <p> {DeptAttrition[2].name} </p>
-            </div>
-          </div>
-        </div>
-        <div className="barchart-wrapper">
           <div className="flex">
-            <div>
-              <h3>Age group</h3>
-              <MultiBarChart data={AttritionByAge} />
-            </div>
-            <h3>people</h3>
-          </div>
-        </div>
-      </div>
-      <div className="content job-role">
-        <h2>Attrition by Job Role</h2>
-        <div className="double-filters">
-          <div className="filter">
-            <p>Select the department:</p>
-            <select className="double-select">
-              {Departments.map((department) => (
-                <option key={department}> {department} </option>
-              ))}
-            </select>
-          </div>
-          <div className="filter">
-            <p>Select the age group:</p>
-            <select className="double-select">
-              <option>18 - 25 years old</option>
-              <option>25 - 30 years old</option>
-              <option>30 - 35 years old</option>
-            </select>
-          </div>
-        </div>
-        <div className="complex-chart">
-          <div className="small-pie">
-            <SmallPieChart data={AttritionByRole} />
-            <h3>People</h3>
-          </div>
-          <div className="barchart-wrapper">
-            <div className="flex">
-              <div>
-                <h3>Age group</h3>
-                <SimpleBarChar data={AttritionByRoleBar} />
+            <div className="small-chart">
+              <h2>Company Attrition</h2>
+              <SmallPieChart data={CompanyAttrition} />
+              <h3>People</h3>
+              <div className="chart-info">
+                <div className="flex">
+                  <div className="yellow-circle"></div>
+                  <p> {CompanyAttrition[0].name} </p>
+                  <p> {Math.round(CompanyAttrition[0].value)} </p>
+                </div>
               </div>
-              <h3>people</h3>
+            </div>
+            <div className="small-chart">
+              <h2>Department Attrition</h2>
+              <SmallPieChart data={DeptAttrition} />
+              <h3>People</h3>
+              <div className="chart-info">
+                <div className="flex">
+                  <div className="yellow-circle"></div>
+                  <p> {DeptAttrition[0].name} </p>
+                  <p> {Math.round(DeptAttrition[0].value)} </p>
+                </div>
+                <div className="flex">
+                  <div className="pink-circle"></div>
+                  <p> {DeptAttrition[1].name} </p>
+                  <p> {Math.round(DeptAttrition[1].value)} </p>
+                </div>
+                <div className="flex">
+                  <div className="blue-circle"></div>
+                  <p> {DeptAttrition[2].name} </p>
+                  <p> {Math.round(DeptAttrition[2].value)} </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="content">
+            <div className="flex">
+              <div className="inline-block">
+                <div className="flex">
+                  <h2>Attrition by Age</h2>
+                </div>
+                <div className="filter">
+                  <p>Select the age group:</p>
+                  <select className="sinlge-select">
+                    <option>18 - 25 years old</option>
+                    <option>25 - 30 years old</option>
+                    <option>30 - 35 years old</option>
+                  </select>
+                </div>
+              </div>
+              <div className="inline-block">
+                <div className="flex">
+                  <div className="yellow-circle"></div>
+                  <p> {DeptAttrition[0].name} </p>
+                </div>
+                <div className="flex">
+                  <div className="pink-circle"></div>
+                  <p> {DeptAttrition[1].name} </p>
+                </div>
+                <div className="flex">
+                  <div className="blue-circle"></div>
+                  <p> {DeptAttrition[2].name} </p>
+                </div>
+              </div>
+            </div>
+            <div className="barchart-wrapper">
+              <div className="flex">
+                <div>
+                  <h3>Age group</h3>
+                  <MultiBarChart data={AttritionByAge} />
+                </div>
+                <h3>people</h3>
+              </div>
+            </div>
+          </div>
+          <div className="content job-role">
+            <h2>Attrition by Job Role</h2>
+            <div className="double-filters">
+              <div className="filter">
+                <p>Select the department:</p>
+                <select className="double-select">
+                  {Departments.map((department) => (
+                    <option key={department}> {department} </option>
+                  ))}
+                </select>
+              </div>
+              <div className="filter">
+                <p>Select the age group:</p>
+                <select className="double-select">
+                  <option>18 - 25 years old</option>
+                  <option>25 - 30 years old</option>
+                  <option>30 - 35 years old</option>
+                </select>
+              </div>
+            </div>
+            <div className="complex-chart">
+              <div className="small-pie">
+                <SmallPieChart data={AttritionByRole} />
+                <h3>People</h3>
+              </div>
+              <div className="barchart-wrapper">
+                <div className="flex">
+                  <div>
+                    <h3>Age group</h3>
+                    <SimpleBarChar data={AttritionByRoleBar} />
+                  </div>
+                  <h3>people</h3>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </BrowserRouter>
   );
 };
 export default Home;

@@ -13,7 +13,7 @@ import Collapsible from "react-collapsible";
 const SuAdminSidebar = (props) => {
   const [SidebarMinimized, setSidebarMin] = useState(false);
 
-  useEffect(() => {}, [window.location.pathname]);
+  useEffect(() => {}, []);
 
   const handleLogout = () => {
     window.localStorage.clear();
@@ -28,6 +28,7 @@ const SuAdminSidebar = (props) => {
         "rotate(180deg)";
       document.getElementById("sidebar").classList.add("sidebar-minimiezd");
     } else {
+      document.getElementById("sidebar").style.transitionDelay = "0";
       document.getElementById("sidebar").style.width = "291px";
       document.getElementById("minimize-icon").style.transform = "none";
       document.getElementById("sidebar").classList.remove("sidebar-minimiezd");

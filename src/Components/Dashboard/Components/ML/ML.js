@@ -7,7 +7,7 @@ const MachineLearning = () => {
   return (
     <BrowserRouter basename="/dashboard/ML">
       <Switch>
-        <Route path="/" exact={true} component={Setup} />
+        <Route path="/" component={Setup} />
         <Route path="/archive" exact={true} component={Archive} />
       </Switch>
     </BrowserRouter>
