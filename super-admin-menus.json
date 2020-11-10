@@ -1,0 +1,69 @@
+{
+    "roleName":"ROLE_SUPER_ADMIN",
+    "menus":[
+       {
+          "id":1,
+          "label":"Dashboard",
+          "urlPath":"/dashboard",
+          "subMenus":null
+       },
+       {
+          "id":2,
+          "label":"ML",
+          "urlPath":"/dashboard/ML",
+          "subMenus":[
+             {
+                "id":1,
+                "label":"Setup",
+                "urlPath":"/dashboard/ML"
+             },
+             {
+                "id":2,
+                "label":"Archive",
+                "urlPath":"/dashboard/ML/archive"
+             }
+          ]
+       },
+       {
+          "id": 3,
+          "label": "Attrition List",
+          "urlPath": "/dashboard/AttritionList",
+          "subMenus": null
+       },
+       {
+          "id": 4,
+          "label": "Notes",
+          "urlPath": "/dashboard/Notes",
+          "subMenus": null
+       },
+       {
+          "id": 5,
+          "label": "Users",
+          "urlPath": "/dashboard/Users",
+          "subMenus": [
+             {
+                "id": 1,
+                "label": "List of users",
+                "urlpath": "/dashboard/Users"
+             },
+             {
+                "id": 2,
+                "label": "Manage roles",
+                "urlpath": "/dashboard/Users/Manage"
+             }
+          ]
+       },
+       {
+          "id": 6,
+          "label": "User info",
+          "urlPath": "/dashboard/Account",
+          "subMenus": [
+             {
+                "id": 1,
+                "label": "Edit profile",
+                "urlpath": "/dashboard/Account/Edit"
+             }
+          ]
+       }
+    ]
+ }

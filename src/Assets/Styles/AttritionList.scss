@@ -1,0 +1,26 @@
+@import "./mixins";
+@import "./variables";
+
+.filters {
+  padding-left: 5%;
+  h2 {
+    font-weight: normal;
+    color: $dark-blue-primary;
+    margin-bottom: 1%;
+  }
+  label {
+    display: inline-grid;
+    width: 25%;
+    margin-right: 1.5%;
+    color: $dark-blue-primary;
+    font-weight: bold;
+    select {
+      margin-top: 3%;
+      @include Select();
+      appearance: none;
+    }
+    select:focus {
+      outline: none;
+    }
+  }
+}

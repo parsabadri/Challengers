@@ -1,0 +1,95 @@
+@import "./variables";
+@import "./mixins";
+
+@font-face {
+  font-family: "Lato-light";
+  src: url("../Fonts/Lato-Light.ttf");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("../Fonts/Lato-Regular.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Lato-bold";
+  src: url("../Fonts/Lato-Bold.ttf");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Lato-italic";
+  src: url("../Fonts/Lato-LightItalic.ttf");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Lato-italic-bold";
+  src: url("../Fonts/Lato-BoldItalic.ttf");
+  font-weight: 700;
+}
+* {
+  font-family: Lato;
+}
+button:focus {
+  outline: none;
+}
+.app-name {
+  // display: flex;
+  display: block;
+  margin: auto;
+  width: 100%;
+  p {
+    margin: 0;
+    align-self: center;
+    font-size: 18px;
+  }
+  p:first-child {
+    color: white;
+    display: inline-block;
+    background-color: $violet;
+    width: 24px;
+    height: 24px;
+    transform: rotate(-13deg);
+    border-radius: 3px;
+    margin-right: 12px;
+    span {
+      h5 {
+        transform: rotate(13deg);
+        font-size: 18px;
+        font-weight: 600;
+      }
+      @include absoluteCentered();
+    }
+  }
+  p:last-child {
+    font-weight: 600;
+    color: $dark-blue-primary;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+.content-wrapper {
+  display: inline-block;
+  width: 77%;
+  margin: 0 0 0 3%;
+  height: 100vh;
+  h1 {
+    margin-left: 3%;
+    color: $dark-blue-primary;
+  }
+  .content {
+    @include Content();
+    height: 89%;
+    .section-border-bottom {
+      @include section-border-bottom();
+    }
+  }
+}
+.flex {
+  display: flex;
+}
+.inline-block {
+  display: inline-block;
+}
+.container {
+  padding: 4% 4% 1% 4% !important;
+}
