@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import ResetPassVector from "../../Assets/Images/Vectors/ForgotPassword.svg";
 import "../../Assets/Styles/Auth.scss";
 import axios from "axios";
 import { config } from "../../config";
 import { useParams } from "react-router";
+import NewPassword from "./NewPassword";
+import { BrowserRouter } from "react-router-dom";
 
 const Verify = () => {
+  const [IsVerified, setIsVerified] = useState(true);
   //this parameter is gotten by the use of useParams hook. it is the id of the user whose
   //identity we want to verify.
   let { id } = useParams();
@@ -28,32 +31,41 @@ const Verify = () => {
       .then((res) => {
         console.log(res);
         window.alert(res.data.message);
+        if (res.status === 200) {
+          setIsVerified(true);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
   };
   return (
-    <div className="auth-wrapper">
-      <img alt="Auth" src={ResetPassVector} className="ResetPWDvector" />
-      <div>
-        <section className="app-name">
-          <p>
-            <span>
-              <h5>P</h5>
-            </span>
-          </p>
-          <p>PILOT PROJECT</p>
-        </section>
-        <form>
-          <h5>Verify your identity</h5>
-          <p> Click the Verify button to proceed. </p>
-          <button onClick={(event) => VerifyUserId(event)} id="test">
-            Verify
-          </button>
-        </form>
-      </div>
-    </div>
+    <BrowserRouter>
+      {IsVerified ? (
+        <NewPassword userID={id} />
+      ) : (
+        <div className="auth-wrapper">
+          <img alt="Auth" src={ResetPassVector} className="ResetPWDvector" />
+          <div>
+            <section className="app-name">
+              <p>
+                <span>
+                  <h5>P</h5>
+                </span>
+              </p>
+              <p>PILOT PROJECT</p>
+            </section>
+            <form>
+              <h5>Verify your identity</h5>
+              <p> Click the Verify button to proceed. </p>
+              <button onClick={(event) => VerifyUserId(event)} id="test">
+                Verify
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+    </BrowserRouter>
   );
 };
 export default Verify;

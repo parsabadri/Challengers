@@ -20,7 +20,7 @@ function App() {
           <Route path="/" exact={true} component={Login} />
           <Route path="/ResetPass" exact={true} component={PasswordReset} />
           <Route
-            path="/ResetPass/NewPassword"
+            path="/ResetPass/NewPassword/:id"
             exact={true}
             component={NewPassword}
           />
