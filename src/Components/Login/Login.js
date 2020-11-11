@@ -26,7 +26,6 @@ const Login = () => {
     };
     axios(req)
       .then((res) => {
-        console.log(res);
         //although the promiss is resolved, we need to check if the status is nothing but 200
         //to log the user in safely.
         if (res.status === 200) {
@@ -35,7 +34,7 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        window.alert(err.response.data.error_description);
       });
   };
   return (

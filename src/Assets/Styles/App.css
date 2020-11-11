@@ -2,3 +2,6 @@ body {
   background-color: #e8edf0;
   padding: 22px;
 }
+button {
+  cursor: pointer;
+}
