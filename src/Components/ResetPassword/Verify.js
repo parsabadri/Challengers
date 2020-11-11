@@ -8,7 +8,7 @@ import NewPassword from "./NewPassword";
 import { BrowserRouter } from "react-router-dom";
 
 const Verify = () => {
-  const [IsVerified, setIsVerified] = useState(true);
+  const [IsVerified, setIsVerified] = useState(false);
   //this parameter is gotten by the use of useParams hook. it is the id of the user whose
   //identity we want to verify.
   let { id } = useParams();
@@ -30,7 +30,6 @@ const Verify = () => {
     axios(req)
       .then((res) => {
         console.log(res);
-        window.alert(res.data.message);
         if (res.status === 200) {
           setIsVerified(true);
         }

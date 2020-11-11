@@ -27,6 +27,7 @@ const NewPassword = (props) => {
       .then((res) => {
         console.log(res);
         window.alert(res.data.message);
+        window.location.assign("/");
       })
       .catch((err) => {
         console.log(err.response);
