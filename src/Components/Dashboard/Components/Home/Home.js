@@ -4,6 +4,7 @@ import SmallPieChart from "./Components/SmallPieChart";
 import MultiBarChart from "./Components/MultiBarChart";
 import SimpleBarChar from "./Components/SimpleBarChart";
 import { BrowserRouter } from "react-router-dom";
+import AlertIcon from "../../../../Assets/Images/Icons/InfoSquare.svg";
 
 const Home = (props) => {
   const [CompanyData, setCompData] = useState({
@@ -90,10 +91,35 @@ const Home = (props) => {
     }
   }, []);
 
+  const goToML = () => {
+    document.getElementById("ml-link").click();
+  };
+
   return (
     <BrowserRouter>
       {props.IsFirstLogin === true ? (
-        <h1>firsty virgin!</h1>
+        <div className="home-wrapper home-alert-wrapper">
+          <div className="dashboard-header">
+            <h2>Dashboard</h2>
+            <p>{CompanyData.name}</p>
+          </div>
+          <div className="content">
+            <div className="centered-alert">
+              <img src={AlertIcon} alt="Alert!" />
+              <p className="big-text">
+                Not enough data to <br />
+                show the charts!
+              </p>
+              <p className="small-text">
+                Please go to the ML Setup Page and
+                <br />
+                Please go to the ML Setup Page and follow the steps and train
+                some attrition data at this point.
+              </p>
+              <button onClick={() => goToML()}>ML Setup Page</button>
+            </div>
+          </div>
+        </div>
       ) : (
         <div className="home-wrapper">
           <div className="dashboard-header">

@@ -172,3 +172,30 @@
     }
   }
 }
+
+.home-alert-wrapper {
+  .content {
+    height: 81vh;
+    height: 81vh;
+    display: flex;
+    align-items: center;
+    text-align-last: center;
+
+    .centered-alert {
+      width: 100%;
+      .big-text {
+        margin: 3% 0 1% !important;
+        color: $dark-blue-primary;
+        font-size: x-large;
+      }
+      .small-text {
+        color: $dark-blue-primary;
+        font-weight: bold;
+        margin: 2% 0;
+      }
+    }
+    button {
+      @include Purple-btn();
+    }
+  }
+}
