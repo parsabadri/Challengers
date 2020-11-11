@@ -8,7 +8,7 @@ import axios from "axios";
 
 const Dashboard = () => {
   const [UserRole, setUserRole] = useState("");
-  //this part is not complete and probably won't be here(change asap)
+
   useEffect(() => {
     let token = window.localStorage.getItem("token");
     parseJwt(token);

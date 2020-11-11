@@ -25,7 +25,7 @@ const ResetPassword = () => {
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
-          setMessage(res.data.data);
+          setMessage(res.data.message);
         }
         setLinkIsSent(!LinkIsSent);
       })

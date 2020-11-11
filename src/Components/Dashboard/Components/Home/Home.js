@@ -92,7 +92,7 @@ const Home = (props) => {
 
   return (
     <BrowserRouter>
-      {IsFirstLogin ? (
+      {props.IsFirstLogin === true ? (
         <h1>firsty virgin!</h1>
       ) : (
         <div className="home-wrapper">
