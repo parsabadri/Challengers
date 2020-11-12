@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../../../Assets/Styles/Notes.scss";
+import "../../../../Assets/Styles/Table.scss";
 
 const Notes = () => {
   const [Data, setData] = useState([

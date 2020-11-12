@@ -1,0 +1,62 @@
+@import "./mixins";
+@import "./variables";
+
+.users-list {
+  color: $dark-blue-primary;
+  .content {
+    padding: 3% 5% !important;
+  }
+  select:focus {
+    outline: none;
+  }
+  h2 {
+    font-family: Lato-light;
+  }
+  .section-title {
+    margin-top: 1%;
+    margin-bottom: 0;
+  }
+  .hint {
+    font-family: Lato-bold;
+  }
+  .Email-input {
+    height: 45px;
+    border: 1px solid #dee3ea;
+    border-radius: 10px;
+    color: $violet;
+    padding: 0 1%;
+    width: 35%;
+    font-size: large;
+    display: block;
+    margin-bottom: 2%;
+  }
+  input:focus {
+    outline: $violet;
+  }
+  .send {
+    @include Purple-btn();
+    width: 25%;
+  }
+  .align-l {
+    text-align: left !important;
+  }
+  .roles {
+    height: 35px;
+    border: 1px solid #dee3ea;
+    border-radius: 10px;
+    color: #7f35fe;
+    padding: 2px;
+    font-size: medium;
+  }
+  .actions {
+    text-align: center;
+  }
+  .edit-btn {
+    width: auto;
+    font-family: Lato-bold;
+    font-size: medium;
+  }
+  .single-btn {
+    margin-left: 45px;
+  }
+}
