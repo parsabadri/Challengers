@@ -12,7 +12,6 @@ import ArrowDown from "../../../../../Assets/Images/Icons/ArrowDown.svg";
 import Minimize from "../../../../../Assets/Images/Icons/NavToggle.svg";
 import Logout from "../../../../../Assets/Images/Icons/Logout.svg";
 import Archive from "../../../../../Assets/Images/Icons/Archive.svg";
-
 import Collapsible from "react-collapsible";
 
 const SuAdminSidebar = (props) => {

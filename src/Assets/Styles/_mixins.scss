@@ -1,5 +1,7 @@
 @import "./variables";
 
+//mixins are styles that are reuseable
+
 // vertically centers an element
 @mixin absoluteCentered {
   position: absolute;
@@ -142,4 +144,20 @@
   height: 15px;
   border-radius: 50%;
   margin-right: 2%;
+}
+@mixin Pagination-item-active {
+  background-color: $violet;
+  border-radius: 50%;
+  border: none;
+  width: 25px;
+  height: 25px;
+  color: white;
+}
+@mixin Pagination-item-deactive {
+  background-color: transparent;
+  border-radius: 50%;
+  border: none;
+  width: 25px;
+  height: 25px;
+  color: $violet;
 }

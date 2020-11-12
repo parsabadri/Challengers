@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../../../Assets/Styles/Notes.scss";
 
 const Notes = () => {
@@ -27,6 +27,14 @@ const Notes = () => {
     },
   ]);
   const [PageCount, setPageCount] = useState(["1", "2", "3"]);
+
+  useEffect(() => {
+    document.getElementById("page-1").className = "active";
+  }, []);
+
+  const handlePage = (page) => {
+    console.log(page);
+  };
   return (
     <div className="content-wrapper">
       <h1>Notes</h1>
@@ -79,6 +87,17 @@ const Notes = () => {
               <p className="xlarge"> {item.note} </p>
               <button className="small edit-btn"> Edit </button>
             </section>
+          ))}
+        </div>
+        <div className="pagination">
+          {PageCount.map((page) => (
+            <button
+              onClick={() => handlePage(page)}
+              id={"page-" + page}
+              key={page}
+            >
+              {page}
+            </button>
           ))}
         </div>
       </div>
