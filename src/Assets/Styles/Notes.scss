@@ -4,6 +4,9 @@
 .notes {
   padding: 3% 5% !important;
   color: $dark-blue-primary;
+  select:focus {
+    outline: none;
+  }
   h2 {
     font-family: Lato-light;
   }
@@ -66,7 +69,9 @@
       }
       .checkbox {
         display: block;
-        margin-bottom: 15px;
+        margin-bottom: 0;
+        align-self: center;
+        text-align: center;
         input {
           padding: 0;
           height: initial;

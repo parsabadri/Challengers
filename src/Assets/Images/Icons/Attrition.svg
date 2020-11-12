@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
     <defs>
-        <filter id="ravfyoarwa">
+        <filter id="rd0uf65ava">
             <feColorMatrix in="SourceGraphic" values="0 0 0 0 0.192157 0 0 0 0 0.243137 0 0 0 0 0.364706 0 0 0 1.000000 0"/>
         </filter>
     </defs>
@@ -9,12 +9,8 @@
             <g>
                 <g>
                     <g>
-                        <g filter="url(#ravfyoarwa)" transform="translate(-64 -398) translate(47 45) translate(0 215) translate(0 120) translate(18 18)">
-                            <g stroke="#200E32" stroke-width="1.5" transform="translate(2 1.5)">
-                                <path d="M5.245 13.281L8.238 9.391 11.652 12.073 14.581 8.293"/>
-                                <circle cx="17.995" cy="2.7" r="1.922"/>
-                                <path d="M12.924 1.62H5.657C2.645 1.62.778 3.753.778 6.764v8.083c0 3.011 1.83 5.135 4.879 5.135h8.604c3.011 0 4.879-2.124 4.879-5.135v-7.04"/>
-                            </g>
+                        <g filter="url(#rd0uf65ava)" transform="translate(-557 -391) translate(538 72) translate(0 181) translate(0 120) translate(19 18)">
+                            <path stroke="#200E32" stroke-width="1.5" d="M9.564 21l4.299-2.023v-5.303l6.74-6.836c.254-.256.397-.608.397-.976V4.366C21 3.61 20.408 3 19.677 3H4.323C3.593 3 3 3.61 3 4.366v1.53c0 .348.128.682.357.935l6.207 6.843V21z"/>
                         </g>
                     </g>
                 </g>

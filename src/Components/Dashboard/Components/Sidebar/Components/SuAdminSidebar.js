@@ -2,12 +2,17 @@ import { NavLink, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Home from "../../../../../Assets/Images/Icons/Home.svg";
 import Attrition from "../../../../../Assets/Images/Icons/Attrition.svg";
-import Upload from "../../../../../Assets/Images/Icons/Upload.svg";
+import ML from "../../../../../Assets/Images/Icons/ML.svg";
 import Notes from "../../../../../Assets/Images/Icons/Notes.svg";
 import Users from "../../../../../Assets/Images/Icons/Users.svg";
+import Roles from "../../../../../Assets/Images/Icons/Roles.svg";
+import UsersList from "../../../../../Assets/Images/Icons/UsersList.svg";
+import Upload from "../../../../../Assets/Images/Icons/Upload.svg";
 import ArrowDown from "../../../../../Assets/Images/Icons/ArrowDown.svg";
 import Minimize from "../../../../../Assets/Images/Icons/NavToggle.svg";
 import Logout from "../../../../../Assets/Images/Icons/Logout.svg";
+import Archive from "../../../../../Assets/Images/Icons/Archive.svg";
+
 import Collapsible from "react-collapsible";
 
 const SuAdminSidebar = (props) => {
@@ -76,12 +81,13 @@ const SuAdminSidebar = (props) => {
           className="nav-collapsible"
           trigger={
             <NavLink activeClassName="nav-active" to="/ML">
-              <img alt="ML" src={Upload} />
+              <img alt="ML" src={ML} />
               <p className="min">ML</p>
             </NavLink>
           }
         >
           <NavLink activeClassName="sub-nav-active" exact={true} to="/ML">
+            <img alt="Upload" src={Upload} />
             <p className="min">Setup</p>
           </NavLink>
           <NavLink
@@ -89,6 +95,7 @@ const SuAdminSidebar = (props) => {
             exact={true}
             to="/ML/archive"
           >
+            <img alt="Archive" src={Archive} />
             <p className="min">Archive</p>
           </NavLink>
         </Collapsible>
@@ -112,9 +119,11 @@ const SuAdminSidebar = (props) => {
           }
         >
           <NavLink activeClassName="sub-nav-active" exact={true} to="/Users">
+            <img alt="UsersList" src={UsersList} />
             <p className="min">List of users</p>
           </NavLink>
           <NavLink activeClassName="sub-nav-active" exact={true} to="/Manage">
+            <img alt="Roles" src={Roles} />
             <p className="min">Manage roles</p>
           </NavLink>
         </Collapsible>
