@@ -5,20 +5,24 @@ import MultiBarChart from "./Components/MultiBarChart";
 import SimpleBarChar from "./Components/SimpleBarChart";
 import { BrowserRouter } from "react-router-dom";
 import AlertIcon from "../../../../Assets/Images/Icons/InfoSquare.svg";
+import axios from "axios";
+import { config } from "../../../../config";
 
 const Home = (props) => {
   const [CompanyData, setCompData] = useState({
     name: "The BlaBla Company",
   });
-  const [CompanyAttrition, setCompAttrition] = useState([
-    { name: "Overall", value: Math.random() * (400 - 100) + 100 },
-    { name: "", value: Math.random() * (400 - 100) + 100 },
-  ]);
-  const [DeptAttrition, setDeptAttrition] = useState([
-    { name: "Sales", value: Math.random() * (400 - 100) + 100 },
-    { name: "R&D", value: Math.random() * (400 - 100) + 100 },
-    { name: "Customer Service", value: Math.random() * (400 - 100) + 100 },
-  ]);
+  const [CompanyAttrition, setCompAttrition] = useState({
+    summaries: [],
+    chart_data: [],
+  });
+  const [DeptAttrition, setDeptAttrition] = useState({
+    summaries: [],
+    chart_data: [],
+    dataset_1: [],
+    dataset_2: [],
+    dataset_3: [],
+  });
   const [AttritionByRole, setAttrByRole] = useState([
     { name: "Sales Manager", value: Math.random() * (400 - 100) + 100 },
     { name: "Sales Executive", value: Math.random() * (400 - 100) + 100 },
@@ -89,7 +93,55 @@ const Home = (props) => {
     } else {
       setIsFirstLogin(false);
     }
+    //each of these functions fetch chart data for each section (e.g. Company Attrition, Dept. attrition, etc.)
+    getCompAttrition();
+    getDeptAttrition();
   }, []);
+
+  const getCompAttrition = () => {
+    let req = {
+      method: "GET",
+      url: config.baseURL + "/rest/allroles/dashboard/companyAttrition",
+      headers: {
+        Authorization: "Bearer " + window.localStorage.getItem("token"),
+      },
+    };
+    axios(req)
+      .then((res) => {
+        console.log(res);
+        setCompAttrition({
+          summaries: res.data.data.summaries,
+          chart_data: res.data.data.datas,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
+  const getDeptAttrition = () => {
+    let req = {
+      method: "GET",
+      url: config.baseURL + "/rest/allroles/dashboard/departmentsAttrition",
+      headers: {
+        Authorization: "Bearer " + window.localStorage.getItem("token"),
+      },
+    };
+    axios(req)
+      .then((res) => {
+        console.log(res);
+        setDeptAttrition({
+          summaries: res.data.data.summaries,
+          chart_data: res.data.data.datas,
+          dataset_1: res.data.data.datas[0],
+          dataset_2: res.data.data.datas[1],
+          dataset_3: res.data.data.datas[2],
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
 
   const goToML = () => {
     document.getElementById("ml-link").click();
@@ -129,35 +181,37 @@ const Home = (props) => {
           <div className="flex">
             <div className="small-chart">
               <h2>Company Attrition</h2>
-              <SmallPieChart data={CompanyAttrition} />
+              <SmallPieChart data={CompanyAttrition.chart_data} />
               <h3>People</h3>
               <div className="chart-info">
-                <div className="flex">
-                  <div className="yellow-circle"></div>
-                  <p> {CompanyAttrition[0].name} </p>
-                  <p> {Math.round(CompanyAttrition[0].value)} </p>
-                </div>
+                {CompanyAttrition.summaries.map((item) => (
+                  <div className="flex">
+                    <div className="yellow-circle"></div>
+                    <p> {item.name} </p>
+                    <p> {item.value} </p>
+                  </div>
+                ))}
               </div>
             </div>
             <div className="small-chart">
               <h2>Department Attrition</h2>
-              <SmallPieChart data={DeptAttrition} />
+              <SmallPieChart data={DeptAttrition.chart_data} />
               <h3>People</h3>
               <div className="chart-info">
                 <div className="flex">
                   <div className="yellow-circle"></div>
-                  <p> {DeptAttrition[0].name} </p>
-                  <p> {Math.round(DeptAttrition[0].value)} </p>
+                  <p> {DeptAttrition.dataset_2.name} </p>
+                  <p> {DeptAttrition.dataset_2.value} </p>
                 </div>
                 <div className="flex">
                   <div className="pink-circle"></div>
-                  <p> {DeptAttrition[1].name} </p>
-                  <p> {Math.round(DeptAttrition[1].value)} </p>
+                  <p> {DeptAttrition.dataset_1.name} </p>
+                  <p> {DeptAttrition.dataset_1.value} </p>
                 </div>
                 <div className="flex">
                   <div className="blue-circle"></div>
-                  <p> {DeptAttrition[2].name} </p>
-                  <p> {Math.round(DeptAttrition[2].value)} </p>
+                  <p> {DeptAttrition.dataset_3.name} </p>
+                  <p> {DeptAttrition.dataset_3.value} </p>
                 </div>
               </div>
             </div>
@@ -180,15 +234,15 @@ const Home = (props) => {
               <div className="inline-block">
                 <div className="flex">
                   <div className="yellow-circle"></div>
-                  <p> {DeptAttrition[0].name} </p>
+                  <p> {DeptAttrition.dataset_2.name} </p>
                 </div>
                 <div className="flex">
                   <div className="pink-circle"></div>
-                  <p> {DeptAttrition[1].name} </p>
+                  <p> {DeptAttrition.dataset_1.name} </p>
                 </div>
                 <div className="flex">
                   <div className="blue-circle"></div>
-                  <p> {DeptAttrition[2].name} </p>
+                  <p> {DeptAttrition.dataset_3.name} </p>
                 </div>
               </div>
             </div>
