@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import AlertIcon from "../../../../Assets/Images/Icons/InfoSquare.svg";
 import axios from "axios";
 import { config } from "../../../../config";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 const Home = (props) => {
   const [CompanyData, setCompData] = useState({
@@ -181,7 +182,24 @@ const Home = (props) => {
           <div className="flex">
             <div className="small-chart">
               <h2>Company Attrition</h2>
-              <SmallPieChart data={CompanyAttrition.chart_data} />
+              {CompanyAttrition.chart_data.length === 0 ? (
+                <SkeletonTheme color="#202020" highlightColor="#444">
+                  <p>
+                    <Skeleton
+                      count={1}
+                      width={160}
+                      height={160}
+                      style={{
+                        borderRadius: "50%",
+                        background: "#f7f7f7",
+                        margin: "auto 95px",
+                      }}
+                    />
+                  </p>
+                </SkeletonTheme>
+              ) : (
+                <SmallPieChart data={CompanyAttrition.chart_data} />
+              )}
               <h3>People</h3>
               <div className="chart-info">
                 {CompanyAttrition.summaries.map((item) => (
@@ -195,7 +213,24 @@ const Home = (props) => {
             </div>
             <div className="small-chart">
               <h2>Department Attrition</h2>
-              <SmallPieChart data={DeptAttrition.chart_data} />
+              {DeptAttrition.chart_data.length === 0 ? (
+                <SkeletonTheme color="#202020" highlightColor="#444">
+                  <p>
+                    <Skeleton
+                      count={1}
+                      width={160}
+                      height={160}
+                      style={{
+                        borderRadius: "50%",
+                        background: "#f7f7f7",
+                        margin: "auto 95px",
+                      }}
+                    />
+                  </p>
+                </SkeletonTheme>
+              ) : (
+                <SmallPieChart data={DeptAttrition.chart_data} />
+              )}
               <h3>People</h3>
               <div className="chart-info">
                 <div className="flex">
