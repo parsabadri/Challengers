@@ -202,6 +202,17 @@ const Home = (props) => {
               )}
               <h3>People</h3>
               <div className="chart-info">
+                {CompanyAttrition.chart_data.length === 0 ? (
+                  <div className="flex">
+                    <div className="yellow-circle"></div>
+                    <Skeleton
+                      count={1}
+                      height={20}
+                      width={250}
+                      style={{ display: "block", margin: "auto" }}
+                    />
+                  </div>
+                ) : null}
                 {CompanyAttrition.summaries.map((item) => (
                   <div className="flex">
                     <div className="yellow-circle"></div>
@@ -233,21 +244,57 @@ const Home = (props) => {
               )}
               <h3>People</h3>
               <div className="chart-info">
-                <div className="flex">
-                  <div className="yellow-circle"></div>
-                  <p> {DeptAttrition.dataset_2.name} </p>
-                  <p> {DeptAttrition.dataset_2.value} </p>
-                </div>
-                <div className="flex">
-                  <div className="pink-circle"></div>
-                  <p> {DeptAttrition.dataset_1.name} </p>
-                  <p> {DeptAttrition.dataset_1.value} </p>
-                </div>
-                <div className="flex">
-                  <div className="blue-circle"></div>
-                  <p> {DeptAttrition.dataset_3.name} </p>
-                  <p> {DeptAttrition.dataset_3.value} </p>
-                </div>
+                {CompanyAttrition.chart_data.length === 0 ? (
+                  <div className="flex">
+                    <div className="yellow-circle"></div>
+                    <Skeleton
+                      count={1}
+                      height={20}
+                      width={250}
+                      style={{ display: "block", margin: "auto" }}
+                    />
+                  </div>
+                ) : (
+                  <div className="flex">
+                    <div className="yellow-circle"></div>
+                    <p> {DeptAttrition.dataset_2.name} </p>
+                    <p> {DeptAttrition.dataset_2.value} </p>
+                  </div>
+                )}
+                {CompanyAttrition.chart_data.length === 0 ? (
+                  <div className="flex">
+                    <div className="yellow-circle"></div>
+                    <Skeleton
+                      count={1}
+                      height={20}
+                      width={250}
+                      style={{ display: "block", margin: "auto" }}
+                    />
+                  </div>
+                ) : (
+                  <div className="flex">
+                    <div className="pink-circle"></div>
+                    <p> {DeptAttrition.dataset_1.name} </p>
+                    <p> {DeptAttrition.dataset_1.value} </p>
+                  </div>
+                )}
+                {CompanyAttrition.chart_data.length === 0 ? (
+                  <div className="flex">
+                    <div className="yellow-circle"></div>
+                    <Skeleton
+                      count={1}
+                      height={20}
+                      width={250}
+                      style={{ display: "block", margin: "auto" }}
+                    />
+                  </div>
+                ) : (
+                  <div className="flex">
+                    <div className="blue-circle"></div>
+                    <p> {DeptAttrition.dataset_3.name} </p>
+                    <p> {DeptAttrition.dataset_3.value} </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
