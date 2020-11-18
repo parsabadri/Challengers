@@ -163,6 +163,10 @@
     margin: 0;
     align-self: center;
   }
+  img {
+    transition-duration: 0.5s;
+    filter: brightness(2);
+  }
 }
 .sidebar-minimiezd {
   @include Card();

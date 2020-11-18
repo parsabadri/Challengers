@@ -23,7 +23,7 @@ const Account = (props) => {
             <div className="header">
               <h2>User Info</h2>
               <section className="flex">
-                <img src={User} />
+                <img alt="user" src={User} />
                 <div className="inline-block grid">
                   <p>Parsa Badri</p>
                   <p>parsabadri</p>
