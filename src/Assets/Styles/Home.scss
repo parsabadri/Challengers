@@ -199,3 +199,10 @@
     }
   }
 }
+@media screen and (max-width: $mobile) {
+  .home-wrapper {
+    width: 100%;
+    height: auto;
+    padding: 5vh 0;
+  }
+}

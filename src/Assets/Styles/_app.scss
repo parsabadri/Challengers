@@ -93,3 +93,14 @@ button:focus {
 .container {
   padding: 4% 4% 1% 4% !important;
 }
+.mobile-only {
+  display: none;
+}
+@media screen and (max-width: $mobile) {
+  .desktop-only {
+    display: none;
+  }
+  .mobile-only {
+    display: unset;
+  }
+}

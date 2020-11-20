@@ -257,8 +257,8 @@ const Home = (props) => {
                 ) : (
                   <div className="flex">
                     <div className="yellow-circle"></div>
-                    <p> {DeptAttrition.dataset_2.name} </p>
-                    <p> {DeptAttrition.dataset_2.value} </p>
+                    {/* <p> {DeptAttrition.dataset_2.name} </p>
+                    <p> {DeptAttrition.dataset_2.value} </p> */}
                   </div>
                 )}
                 {CompanyAttrition.chart_data.length === 0 ? (
@@ -274,8 +274,8 @@ const Home = (props) => {
                 ) : (
                   <div className="flex">
                     <div className="pink-circle"></div>
-                    <p> {DeptAttrition.dataset_1.name} </p>
-                    <p> {DeptAttrition.dataset_1.value} </p>
+                    {/* <p> {DeptAttrition.dataset_1.name} </p>
+                    <p> {DeptAttrition.dataset_1.value} </p> */}
                   </div>
                 )}
                 {CompanyAttrition.chart_data.length === 0 ? (
@@ -291,8 +291,8 @@ const Home = (props) => {
                 ) : (
                   <div className="flex">
                     <div className="blue-circle"></div>
-                    <p> {DeptAttrition.dataset_3.name} </p>
-                    <p> {DeptAttrition.dataset_3.value} </p>
+                    {/* <p> {DeptAttrition.dataset_3.name} </p>
+                    <p> {DeptAttrition.dataset_3.value} </p> */}
                   </div>
                 )}
               </div>
@@ -316,15 +316,15 @@ const Home = (props) => {
               <div className="inline-block">
                 <div className="flex">
                   <div className="yellow-circle"></div>
-                  <p> {DeptAttrition.dataset_2.name} </p>
+                  {/* <p> {DeptAttrition.dataset_2.name} </p> */}
                 </div>
                 <div className="flex">
                   <div className="pink-circle"></div>
-                  <p> {DeptAttrition.dataset_1.name} </p>
+                  {/* <p> {DeptAttrition.dataset_1.name} </p> */}
                 </div>
                 <div className="flex">
                   <div className="blue-circle"></div>
-                  <p> {DeptAttrition.dataset_3.name} </p>
+                  {/* <p> {DeptAttrition.dataset_3.name} </p> */}
                 </div>
               </div>
             </div>

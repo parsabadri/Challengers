@@ -12,10 +12,12 @@ import ArrowDown from "../../../../../Assets/Images/Icons/ArrowDown.svg";
 import Minimize from "../../../../../Assets/Images/Icons/NavToggle.svg";
 import Logout from "../../../../../Assets/Images/Icons/Logout.svg";
 import Archive from "../../../../../Assets/Images/Icons/Archive.svg";
+import Close from "../../../../../Assets/Images/Icons/Close.svg";
 import Collapsible from "react-collapsible";
 
 const SuAdminSidebar = (props) => {
   const [SidebarMinimized, setSidebarMin] = useState(false);
+  const [MobileMenu, setMobileMenu] = useState({ isOpen: false });
 
   useEffect(() => {}, []);
 
@@ -38,9 +40,33 @@ const SuAdminSidebar = (props) => {
       document.getElementById("sidebar").classList.remove("sidebar-minimiezd");
     }
   };
+  //the following two functions handle navbar open and close on mobile devices
+  const closeMobileMenu = () => {
+    document.getElementById("sidebar").style.transform = "translateY(-90vh)";
+    //the timeouts are only set in order to prevent any style conflicts related to position change
+    setTimeout(() => {
+      document.getElementById("sidebar").style.position = "absolute";
+      document.getElementById("sidebar").style.backgroundColor = "transparent";
+      setMobileMenu({ isOpen: false });
+    }, 650);
+  };
+  const openMobileMenu = () => {
+    setMobileMenu({ isOpen: true });
+    document.getElementById("sidebar").style.position = "unset";
+    setTimeout(() => {
+      document.getElementById("sidebar").style.backgroundColor = "#ffffff";
+      document.getElementById("sidebar").style.transform = "none";
+    }, 150);
+  };
   return (
     <div id="sidebar" className="sidebar">
-      <section className="app-name navbar-brand">
+      <button
+        onClick={() => closeMobileMenu()}
+        className="mobile-sidebar-close mobile-only"
+      >
+        <img src={Close} />
+      </button>
+      <section className="app-name navbar-brand desktop-only">
         <p className="min-name">
           <h5>P</h5>
         </p>
@@ -49,7 +75,7 @@ const SuAdminSidebar = (props) => {
       <button className="minimizer" onClick={() => MinimizeSidebar()}>
         <img id="minimize-icon" src={Minimize} alt="minimize" />
       </button>
-      <div className="account">
+      <div className="account desktop-only">
         <Link to="/Account" className="no-hover info">
           <img src={props.UserInfo[0].avatar} alt="User" />
           <section className="min">
@@ -67,7 +93,7 @@ const SuAdminSidebar = (props) => {
         exact={true}
         to="../"
       >
-        <img alt="home" src={Home} />
+        <img className="desktop-only" alt="home" src={Home} />
         <p className="min">Home</p>
       </NavLink>
       <NavLink
@@ -77,16 +103,16 @@ const SuAdminSidebar = (props) => {
         to="/ML"
       >
         <Collapsible
-          className="nav-collapsible"
+          className="nav-collapsible desktop-only"
           trigger={
             <NavLink activeClassName="nav-active" to="/ML">
-              <img alt="ML" src={ML} />
+              <img className="desktop-only" alt="ML" src={ML} />
               <p className="min">ML</p>
             </NavLink>
           }
         >
           <NavLink activeClassName="sub-nav-active" exact={true} to="/ML">
-            <img alt="Upload" src={Upload} />
+            <img className="desktop-only" alt="Upload" src={Upload} />
             <p className="min">Setup</p>
           </NavLink>
           <NavLink
@@ -94,17 +120,17 @@ const SuAdminSidebar = (props) => {
             exact={true}
             to="/ML/archive"
           >
-            <img alt="Archive" src={Archive} />
+            <img className="desktop-only" alt="Archive" src={Archive} />
             <p className="min">Archive</p>
           </NavLink>
         </Collapsible>
       </NavLink>
       <NavLink activeClassName="nav-active" to="/AttritionList">
-        <img alt="Attrition" src={Attrition} />
+        <img className="desktop-only" alt="Attrition" src={Attrition} />
         <p className="min">Attrition list</p>
       </NavLink>
       <NavLink activeClassName="nav-active" to="/Notes">
-        <img alt="Notes" src={Notes} />
+        <img className="desktop-only" alt="Notes" src={Notes} />
         <p className="min">Notes</p>
       </NavLink>
       <NavLink className="nav-parent" activeClassName="nav-active" to="/Users">
@@ -112,26 +138,34 @@ const SuAdminSidebar = (props) => {
           className="nav-collapsible"
           trigger={
             <NavLink activeClassName="nav-active" to="/Users">
-              <img alt="Users" src={Users} />
+              <img className="desktop-only" alt="Users" src={Users} />
               <p className="min">Users</p>
             </NavLink>
           }
         >
           <NavLink activeClassName="sub-nav-active" exact={true} to="/Users">
-            <img alt="UsersList" src={UsersList} />
+            <img className="desktop-only" alt="UsersList" src={UsersList} />
             <p className="min">List of users</p>
           </NavLink>
           <NavLink activeClassName="sub-nav-active" exact={true} to="/Manage">
-            <img alt="Roles" src={Roles} />
+            <img className="desktop-only" alt="Roles" src={Roles} />
             <p className="min">Manage roles</p>
           </NavLink>
         </Collapsible>
       </NavLink>
-      <span className="hr_line"></span>
+      <span className="hr_line desktop-only"></span>
       <menu onClick={() => handleLogout()}>
-        <img className="min-icon" src={Logout} alt="minimize" />
+        <img
+          className="desktop-only"
+          className="min-icon desktop-only"
+          src={Logout}
+          alt="minimize"
+        />
         <p className="min">Log out</p>
       </menu>
+      <p className="fixed-trigger mobile-only" onClick={() => openMobileMenu()}>
+        okjbl;
+      </p>
     </div>
   );
 };

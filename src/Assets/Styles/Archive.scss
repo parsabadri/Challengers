@@ -1,0 +1,37 @@
+@import "./mixins";
+@import "./variables";
+
+.bold {
+  font-weight: bold;
+  font-family: Lato-italic-bold;
+  .detail {
+    display: inline-block;
+    color: $violet;
+    margin: 0;
+  }
+}
+
+.line {
+  width: 100%;
+  margin: 2px -3% 0 -1.6%;
+}
+.header2 {
+  margin: 0 auto 1% auto;
+  width: 90.5%;
+}
+.flex {
+  font-weight: 100;
+}
+
+.step-title {
+  font-weight: 100;
+  margin-bottom: 40px auto;
+}
+
+.notbold {
+  font-weight: 100;
+  color: $dark-blue-primary;
+}
+// .double-action-btn-purple:hover {
+//   @include Transparent-purple-btn();
+// }

@@ -1,3 +1,11 @@
+@import "./mixins";
+@import "./variables";
+
 .dashboard-wrapper {
   display: flex;
+}
+@media screen and (max-width: $mobile) {
+  .dashboard-wrapper {
+    display: block;
+  }
 }

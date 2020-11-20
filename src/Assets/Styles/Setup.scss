@@ -44,6 +44,69 @@
     @include ProgressLine();
   }
 }
+.line-wrapper {
+  display: block;
+  width: 70%;
+  margin: 0 auto;
+  padding: 25px 0;
+  box-sizing: border-box;
+
+  .line {
+    border-bottom: 3px solid $dark-blue-primary;
+    margin: unset;
+    position: relative;
+    box-sizing: border-box;
+    .initial-state {
+      width: 34px;
+      height: 34px;
+      border: 3px solid $dark-blue-primary;
+      display: inline-block;
+      border-radius: 50%;
+      position: absolute;
+      bottom: -19px;
+      box-sizing: border-box;
+      background: white;
+    }
+    #training-data {
+      left: 0;
+    }
+    #train-model {
+      left: 31%;
+    }
+    #prediction-data {
+      left: 64%;
+    }
+    #do-prediction {
+      left: 97%;
+    }
+  }
+  .progress-labels {
+    margin: unset;
+    position: relative;
+    box-sizing: border-box;
+    .initial-state {
+      height: 34px;
+      display: inline-block;
+      border-radius: 50%;
+      position: absolute;
+      bottom: -19px;
+      box-sizing: border-box;
+      background: white;
+    }
+    #training-data {
+      left: 0;
+    }
+    #train-model {
+      left: 31%;
+    }
+    #prediction-data {
+      left: 64%;
+    }
+    #do-prediction {
+      left: 97%;
+    }
+  }
+}
 .line {
   width: 100%;
   margin: 2px -3% 0 -1.6%;

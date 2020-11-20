@@ -209,4 +209,63 @@
       margin: auto;
     }
   }
+  .mobile-sidebar-close {
+    display: none;
+  }
+}
+//media queries for mobile size styles
+@media screen and (max-width: $mobile) {
+  .sidebar {
+    width: 100%;
+    transition-delay: 0.2s;
+    margin: 0;
+    background-color: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    height: 100vh;
+    transition-duration: 0.5s;
+    transform: translateY(-90vh);
+    position: absolute;
+    .minimizer {
+      display: none;
+    }
+    .desktop-only {
+      display: none;
+    }
+    .mobile-sidebar-close {
+      margin: 5% 5% 20%;
+      border: none;
+      padding: 0;
+      background-color: transparent;
+    }
+    a {
+      border: none;
+      background-color: transparent;
+      display: block;
+      color: #313e5d;
+      padding: 2% 0;
+      text-align-last: center;
+      cursor: pointer;
+      text-decoration: none;
+      color: #313e5d;
+      width: 100%;
+      transition-duration: 0.2s;
+      transition-delay: 0.2s;
+    }
+    .min {
+      width: 100%;
+      text-align: center;
+      font-size: x-large;
+    }
+    menu {
+      width: 100%;
+      padding: 0;
+    }
+    .fixed-trigger {
+      position: fixed;
+      bottom: 2%;
+      left: 2%;
+    }
+  }
 }

@@ -6,44 +6,44 @@ import { BrowserRouter } from "react-router-dom";
 
 const Setup = () => {
   const [Progress, setProgress] = useState({
-    data: false,
-    training: false,
-    model: false,
-    prediction: false,
+    data: 0,
+    training: 0,
+    model: 0,
+    prediction: 0,
   });
   const handleStartTrain = (event) => {
     event.preventDefault();
     setTimeout(() => {
       setProgress({
-        data: Progress.data,
-        training: !Progress.training,
-        model: Progress.model,
-        prediction: Progress.prediction,
+        data: 2,
+        training: 1,
+        model: 0,
+        prediction: 0,
       });
     }, 3000);
   };
   const ReplaceData = () => {
     setProgress({
-      data: !Progress.data,
-      training: Progress.training,
-      model: Progress.model,
-      prediction: Progress.prediction,
+      data: 1,
+      training: 0,
+      model: 0,
+      prediction: 0,
     });
   };
   const ReplaceEmployeeData = () => {
     setProgress({
-      data: Progress.data,
-      training: Progress.training,
-      model: !Progress.model,
-      prediction: Progress.prediction,
+      data: 2,
+      training: 2,
+      model: 1,
+      prediction: 0,
     });
   };
   const Predict = () => {
     setProgress({
-      data: Progress.data,
-      training: Progress.training,
-      model: Progress.model,
-      prediction: !Progress.prediction,
+      data: 2,
+      training: 2,
+      model: 2,
+      prediction: 1,
     });
   };
   return (
@@ -52,7 +52,31 @@ const Setup = () => {
         <h1>ML Setup</h1>
         <div className="content">
           <div className="progress">
-            <div className="progress-bar">
+            <div className="line-wrapper">
+              <div className="line">
+                <span id="training-data" className="initial-state"></span>
+                <span id="train-model" className="initial-state"></span>
+                <span id="prediction-data" className="initial-state"></span>
+                <span id="do-prediction" className="initial-state"></span>
+              </div>
+            </div>
+            <div className="line-wrapper">
+              <div className="progress-labels">
+                <span id="training-data" className="initial-state">
+                  Training Data
+                </span>
+                <span id="train-model" className="initial-state">
+                  Train Model
+                </span>
+                <span id="prediction-data" className="initial-state">
+                  Prediction Data
+                </span>
+                <span id="do-prediction" className="initial-state">
+                  Do Prediction
+                </span>
+              </div>
+            </div>
+            {/* <div className="progress-bar">
               <section id="step1">
                 <div className="step">
                   {Progress.data === true ? (
@@ -95,6 +119,7 @@ const Setup = () => {
                 </div>
               </section>
             </div>
+             */}
             <p className="setup-report">
               The Model has been updated. Ready for prediction.
             </p>
