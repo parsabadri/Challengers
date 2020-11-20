@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../../../../Assets/Styles/Setup.scss";
 import Circle from "../../../../../Assets/Images/Icons/Circle.svg";
 import Checked from "../../../../../Assets/Images/Icons/Checked.svg";
@@ -62,18 +62,18 @@ const Setup = () => {
             </div>
             <div className="line-wrapper">
               <div className="progress-labels">
-                <span id="training-data" className="initial-state">
+                <h4 id="training-data" className="initial-state">
                   Training Data
-                </span>
-                <span id="train-model" className="initial-state">
+                </h4>
+                <h4 id="train-model" className="initial-state">
                   Train Model
-                </span>
-                <span id="prediction-data" className="initial-state">
+                </h4>
+                <h4 id="prediction-data" className="initial-state">
                   Prediction Data
-                </span>
-                <span id="do-prediction" className="initial-state">
+                </h4>
+                <h4 id="do-prediction" className="initial-state">
                   Do Prediction
-                </span>
+                </h4>
               </div>
             </div>
             {/* <div className="progress-bar">
