@@ -1,13 +1,13 @@
 @import "./variables";
 @import "./mixins";
-.progress {
-  .setup-report {
-    font-style: italic;
-    color: $dark-blue-primary;
-    text-align: center;
-    font-weight: 600;
-    font-size: small;
-  }
+
+.setup-report {
+  font-style: italic;
+  color: $dark-blue-primary;
+  text-align: center;
+  font-weight: 600;
+  font-size: small;
+  margin-top: 6%;
 }
 .progress-bar {
   display: flex;
@@ -56,6 +56,45 @@
     margin: unset;
     position: relative;
     box-sizing: border-box;
+    .step-label {
+      color: $dark-blue-primary;
+      width: 140px;
+      position: absolute;
+      bottom: -60px;
+      left: -30px;
+    }
+    .done-state {
+      width: 34px;
+      height: 34px;
+      border: 3px solid $violet;
+      display: inline-block;
+      border-radius: 50%;
+      position: absolute;
+      bottom: -19px;
+      box-sizing: border-box;
+      background: url("../Images/Icons/Checkmark.png");
+      background-position: center;
+      background-size: 21px;
+      background-color: white !important;
+      background-repeat: no-repeat;
+      h4 {
+        color: $violet !important;
+      }
+    }
+    .ongoing-state {
+      width: 34px;
+      height: 34px;
+      border: 3px solid $violet;
+      display: inline-block;
+      border-radius: 50%;
+      position: absolute;
+      bottom: -19px;
+      box-sizing: border-box;
+      background-color: $violet;
+      h4 {
+        color: $violet !important;
+      }
+    }
     .initial-state {
       width: 34px;
       height: 34px;
@@ -65,7 +104,7 @@
       position: absolute;
       bottom: -19px;
       box-sizing: border-box;
-      background: white;
+      background-color: white;
     }
     #training-data {
       left: 0;
@@ -119,7 +158,7 @@
   padding-left: 5%;
   h2 {
     font-weight: normal;
-    margin: 0;
+    margin: 0 0 2%;
   }
   .double-action-btn {
     @include Transparent-purple-btn();
@@ -139,7 +178,7 @@
   //   @include Purple-btn();
   // }
   .single-action-btn {
-    @include Transparent-purple-btn();
+    @include Purple-btn();
     display: inline-block;
     margin: 1% auto 1% 0;
     transition-duration: 0.4s;
@@ -150,6 +189,37 @@
   .bold-info-text {
     font-family: Lato-italic-bold;
   }
+  .info-text {
+    font-family: Lato;
+    a {
+      color: $violet;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}
+.file-details {
+  line-height: 7px;
+  .bold-info-text:first-child {
+    margin-top: 2%;
+  }
+  .change-data-btn {
+    border: none;
+    background-color: transparent;
+    color: $violet;
+    font-size: medium;
+    font-weight: bold;
+    padding-left: 0;
+    text-align: left;
+  }
+  .report-link {
+    text-decoration: none;
+    color: $violet;
+  }
+}
+.file-icon {
+  width: 50px;
+  align-self: self-end;
 }
 .step-section:last-child {
   margin-right: 3%;

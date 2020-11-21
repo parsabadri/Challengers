@@ -78,7 +78,8 @@ button:focus {
   }
   .content {
     @include Content();
-    height: 89%;
+    min-height: 89%;
+    margin-bottom: 3%;
     .section-border-bottom {
       @include section-border-bottom();
     }
