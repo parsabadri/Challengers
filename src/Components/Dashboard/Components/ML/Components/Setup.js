@@ -215,63 +215,6 @@ const Setup = () => {
             ReplaceData={() => ReplaceData()}
             ChangeTrainingData={() => ChangeTrainingData()}
           />
-          {/* <section className="step-section">
-              <h2 className="step-title">1. Data</h2>
-              <p>Last sample data has been uploaded at Oct 14 2020.</p>
-              <p className="bold-info-text">
-                Data file name: attrition_train_data.csv
-              </p>
-              <p className="bold-info-text">File size: 180KB</p>
-              <div className="flex">
-              
-                <button
-                  onClick={() => ReplaceData()}
-                  className="double-action-btn"
-                >
-                  Replace Data
-                </button>
-                <button className="double-action-btn">
-                  Add to existing Data
-                </button>
-              </div>
-            </section> */}
-          {/* <section className="step-section">
-              <h2 className="step-title">2. Training</h2>
-              <p>Last time trained at Oct 15 2020.</p>
-              <p className="bold-info-text">
-                Data file name: attrition_train_data.csv
-              </p>
-              <p className="bold-info-text">File size: 180KB</p>
-              <div className="flex">
-                <button
-                  onClick={(event) => handleStartTrain(event)}
-                  className="single-action-btn"
-                >
-                  Add to existing Data
-                </button>
-              </div>
-            </section> */}
-          {/* </div> */}
-
-          {/* <section className="step-section">
-            <h2 className="step-title">3. Model / Prediction</h2>
-            <p>Upload employee data to predict the attrition.</p>
-
-            <div className="flex">
-              <button
-                onClick={() => ReplaceEmployeeData()}
-                className="double-action-btn-purple"
-              >
-                Replace Data
-              </button>
-              <button
-                onClick={() => Predict()}
-                className="double-action-btn-purple"
-              >
-                Add to existing Data
-              </button>
-            </div>
-          </section> */}
         </div>
       </div>
     </BrowserRouter>

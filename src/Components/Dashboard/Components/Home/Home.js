@@ -24,16 +24,11 @@ const Home = (props) => {
     dataset_2: [],
     dataset_3: [],
   });
-  const [AttritionByRole, setAttrByRole] = useState([
-    { name: "Sales Manager", value: Math.random() * (400 - 100) + 100 },
-    { name: "Sales Executive", value: Math.random() * (400 - 100) + 100 },
-    { name: "Sales Representative", value: Math.random() * (400 - 100) + 100 },
-    { name: "Marketing", value: Math.random() * (400 - 100) + 100 },
-  ]);
+  const [AttritionByRole, setAttrByRole] = useState([]);
   const [Departments, setDepartments] = useState([
     "Sales",
-    "R&D",
-    "Customer Service",
+    "Research & Development",
+    "Human Resources",
   ]);
   const [JobRoles, setJobRoles] = useState([
     "Marketing",
@@ -41,29 +36,10 @@ const Home = (props) => {
     "Sales Manager",
     "Sales Executive",
   ]);
-  const [AttritionByAge, setAttrByAge] = useState([
-    {
-      name: "18-25",
-      Sales: 40,
-      "R&D": 24,
-      "Customer Service": 34,
-      amt: 24,
-    },
-    {
-      name: "25-30",
-      Sales: 30,
-      "R&D": 13,
-      "Customer Service": 23,
-      amt: 22,
-    },
-    {
-      name: "30-35",
-      Sales: 20,
-      "R&D": 98,
-      "Customer Service": 23,
-      amt: 22,
-    },
-  ]);
+  const [AttritionByAge, setAttrByAge] = useState([]);
+  const [AttrByAgeDepts, setAttrByAgeDepts] = useState([]);
+  const [FilterAge, setFilterAge] = useState("AGE_18_35_YO");
+  const [FilterDept, setFilterDept] = useState("Sales");
   const [AttritionByRoleBar, setAttrByRoleBar] = useState([
     {
       name: "Marketing",
@@ -97,6 +73,7 @@ const Home = (props) => {
     //each of these functions fetch chart data for each section (e.g. Company Attrition, Dept. attrition, etc.)
     getCompAttrition();
     getDeptAttrition();
+    getAttritionByAge();
   }, []);
 
   const getCompAttrition = () => {
@@ -143,11 +120,81 @@ const Home = (props) => {
         console.log(err.response);
       });
   };
-
+  //this function clicks on the ml setup button on the sidebar
   const goToML = () => {
     document.getElementById("ml-link").click();
   };
 
+  const getAttritionByAge = () => {
+    let req = {
+      method: "GET",
+      url:
+        config.baseURL +
+        "/rest/allroles/dashboard/attritionByAge?filter=" +
+        document.getElementById("attrition-by-age").value,
+      headers: {
+        Authorization: "Bearer " + window.localStorage.getItem("token"),
+      },
+    };
+    axios(req)
+      .then((res) => {
+        console.log(res);
+        setAttrByAge(res.data.data.datas);
+        setAttrByAgeDepts(res.data.data.summaries);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //this function sets the chosen age range for attrition by job role
+  const jobRoleAgeChange = () => {
+    let req = {
+      method: "GET",
+      url:
+        config.baseURL +
+        "/rest/allroles/dashboard/attritionByJobRole?department=" +
+        document.getElementById("attrition-by-job-role-department").value +
+        "&filter=" +
+        document.getElementById("attrition-by-job-role-age").value,
+      headers: {
+        Authorization: "Bearer " + window.localStorage.getItem("token"),
+      },
+    };
+    axios(req)
+      .then((res) => {
+        console.log(res);
+        setAttrByRole(res.data.data.datas);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getAttritionByJobRolePie = () => {};
+  //this function sets the chosen department name for attrition by job role
+  const jobRoleDeptChange = () => {
+    let req = {
+      method: "GET",
+      url:
+        config.baseURL +
+        "/rest/allroles/dashboard/attritionByJobRole?department=" +
+        document.getElementById("attrition-by-job-role-department").value +
+        "&filter=" +
+        document.getElementById("attrition-by-job-role-age").value,
+      headers: {
+        Authorization: "Bearer " + window.localStorage.getItem("token"),
+      },
+    };
+    axios(req)
+      .then((res) => {
+        console.log(res);
+        setAttrByRole(res.data.data.datas);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <BrowserRouter>
       {props.IsFirstLogin === true ? (
@@ -306,21 +353,25 @@ const Home = (props) => {
                 </div>
                 <div className="filter">
                   <p>Select the age group:</p>
-                  <select className="sinlge-select">
-                    <option>18 - 25 years old</option>
-                    <option>25 - 30 years old</option>
-                    <option>30 - 35 years old</option>
+                  <select
+                    onChange={() => getAttritionByAge()}
+                    className="sinlge-select"
+                    id="attrition-by-age"
+                  >
+                    <option value="AGE_18_35_YO">18 - 35 years old</option>
+                    <option value="AGE_36_50_YO">36 - 50 years old</option>
+                    <option value="AGE_GT50_YO"> 50+ years old</option>
                   </select>
                 </div>
               </div>
               <div className="inline-block">
                 <div className="flex">
                   <div className="yellow-circle"></div>
-                  <p> {DeptAttrition.dataset_2.name} </p>
+                  <p> {DeptAttrition.dataset_1.name} </p>
                 </div>
                 <div className="flex">
                   <div className="pink-circle"></div>
-                  <p> {DeptAttrition.dataset_1.name} </p>
+                  <p> {DeptAttrition.dataset_2.name} </p>
                 </div>
                 <div className="flex">
                   <div className="blue-circle"></div>
@@ -343,18 +394,28 @@ const Home = (props) => {
             <div className="double-filters">
               <div className="filter">
                 <p>Select the department:</p>
-                <select className="double-select">
+                <select
+                  id="attrition-by-job-role-department"
+                  className="double-select"
+                  onChange={() => jobRoleDeptChange()}
+                >
                   {Departments.map((department) => (
-                    <option key={department}> {department} </option>
+                    <option key={department} value={department}>
+                      {department}
+                    </option>
                   ))}
                 </select>
               </div>
               <div className="filter">
                 <p>Select the age group:</p>
-                <select className="double-select">
-                  <option>18 - 25 years old</option>
-                  <option>25 - 30 years old</option>
-                  <option>30 - 35 years old</option>
+                <select
+                  onChange={() => jobRoleAgeChange()}
+                  id="attrition-by-job-role-age"
+                  className="double-select"
+                >
+                  <option value="AGE_18_35_YO">18 - 35 years old</option>
+                  <option value="AGE_36_50_YO">36 - 50 years old</option>
+                  <option value="AGE_GT50_YO"> 50+ years old</option>
                 </select>
               </div>
             </div>

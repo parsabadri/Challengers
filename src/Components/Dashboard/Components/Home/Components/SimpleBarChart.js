@@ -16,7 +16,7 @@ export default function BarCharts(props) {
       barSize={30}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
+      <XAxis dataKey="name" angle={6} />
       <YAxis yAxisId="left" orientation="left" stroke="#313e5d" />
       <Tooltip />
       <Bar yAxisId="left" dataKey="people" fill="#ff8bdb" radius={15} />
