@@ -74,6 +74,7 @@ const Home = (props) => {
     getCompAttrition();
     getDeptAttrition();
     getAttritionByAge();
+    getAttrByJobRoleDept();
   }, []);
 
   const getCompAttrition = () => {
@@ -94,6 +95,11 @@ const Home = (props) => {
       })
       .catch((err) => {
         console.log(err.response);
+        // logging the user out when thier token has expired, this is done here optionally, only because
+        // this function runs at every component mount.
+        if (err.response.status === 401) {
+          logUserOutOnAuthErr();
+        }
       });
   };
 
@@ -148,7 +154,7 @@ const Home = (props) => {
   };
 
   //this function sets the chosen age range for attrition by job role
-  const jobRoleAgeChange = () => {
+  const getAttrByJobRoleAgeChange = () => {
     let req = {
       method: "GET",
       url:
@@ -173,7 +179,7 @@ const Home = (props) => {
 
   const getAttritionByJobRolePie = () => {};
   //this function sets the chosen department name for attrition by job role
-  const jobRoleDeptChange = () => {
+  const getAttrByJobRoleDept = () => {
     let req = {
       method: "GET",
       url:
@@ -195,6 +201,15 @@ const Home = (props) => {
         console.log(err);
       });
   };
+  // Since the refreshtoken is not implemented due to project scale down, we logout the user
+  // After gettin a 401 API response status (unauthorized status) and display an alert so they
+  // know they have to log back in. The whole thing happns through this function
+  const logUserOutOnAuthErr = () => {
+    window.alert("Session expired, please log back in to your account.");
+    window.localStorage.clear();
+    window.location.assign("/");
+  };
+
   return (
     <BrowserRouter>
       {props.IsFirstLogin === true ? (
@@ -397,7 +412,7 @@ const Home = (props) => {
                 <select
                   id="attrition-by-job-role-department"
                   className="double-select"
-                  onChange={() => jobRoleDeptChange()}
+                  onChange={() => getAttrByJobRoleDept()}
                 >
                   {Departments.map((department) => (
                     <option key={department} value={department}>
@@ -409,7 +424,7 @@ const Home = (props) => {
               <div className="filter">
                 <p>Select the age group:</p>
                 <select
-                  onChange={() => jobRoleAgeChange()}
+                  onChange={() => getAttrByJobRoleAgeChange()}
                   id="attrition-by-job-role-age"
                   className="double-select"
                 >
@@ -421,8 +436,29 @@ const Home = (props) => {
             </div>
             <div className="complex-chart">
               <div className="small-pie">
-                <SmallPieChart data={AttritionByRole} />
-                <h3>People</h3>
+                {/* since this chart has filters and it can be an empty result, we add a conditional skeleton rendering */}
+                {AttritionByRole.length === 0 ? (
+                  <SkeletonTheme color="#202020" highlightColor="#444">
+                    <p>
+                      <Skeleton
+                        count={1}
+                        width={160}
+                        height={160}
+                        style={{
+                          borderRadius: "50%",
+                          background: "#f7f7f7",
+                          margin: "auto 95px",
+                        }}
+                      />
+                    </p>
+                    <p className="small-info">no data!</p>
+                  </SkeletonTheme>
+                ) : (
+                  <React.Fragment>
+                    <SmallPieChart data={AttritionByRole} />
+                    <h3>People</h3>
+                  </React.Fragment>
+                )}
               </div>
               <div className="barchart-wrapper">
                 <div className="flex">
