@@ -464,7 +464,7 @@ const Home = (props) => {
                 <div className="flex">
                   <div>
                     <h3>Age group</h3>
-                    <SimpleBarChar data={AttritionByRoleBar} />
+                    <SimpleBarChar data={AttritionByRole} />
                   </div>
                   <h3>people</h3>
                 </div>

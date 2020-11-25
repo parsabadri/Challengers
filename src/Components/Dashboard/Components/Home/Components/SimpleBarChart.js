@@ -2,6 +2,7 @@ import React from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 
 export default function BarCharts(props) {
+  const Colors = ["#ffff", "#ff8bdb"];
   return (
     <BarChart
       width={600}
@@ -16,10 +17,10 @@ export default function BarCharts(props) {
       barSize={30}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" angle={6} />
+      <XAxis dataKey="name" angle={5} />
       <YAxis yAxisId="left" orientation="left" stroke="#313e5d" />
       <Tooltip />
-      <Bar yAxisId="left" dataKey="people" fill="#ff8bdb" radius={15} />
+      <Bar yAxisId="left" dataKey="value" fill="#4df3f4" radius={15} />
     </BarChart>
   );
 }

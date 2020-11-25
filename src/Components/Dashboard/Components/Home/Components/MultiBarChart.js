@@ -23,13 +23,13 @@ export default function BarCharts(props) {
       <YAxis yAxisId="mid" orientation="" stroke="transparent" />
       <Tooltip />
       <Bar yAxisId="left" dataKey="Sales" fill="#ffec6f" radius={50} />
-      <Bar yAxisId="right" dataKey="Research & Development" fill="#ff8bdb" radius={50} />
       <Bar
-        yAxisId="mid"
-        dataKey="Human Resources"
-        fill="#4df3f4"
-        radius={55}
+        yAxisId="right"
+        dataKey="Research & Development"
+        fill="#ff8bdb"
+        radius={50}
       />
+      <Bar yAxisId="mid" dataKey="Human Resources" fill="#4df3f4" radius={55} />
     </BarChart>
   );
 }

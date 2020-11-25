@@ -57,9 +57,7 @@ const Verify = () => {
             <form>
               <h5>Verify your identity</h5>
               <p> Click the Verify button to proceed. </p>
-              <button onClick={(event) => VerifyUserId(event)} id="test">
-                Verify
-              </button>
+              <button onClick={(event) => VerifyUserId(event)}>Verify</button>
             </form>
           </div>
         </div>

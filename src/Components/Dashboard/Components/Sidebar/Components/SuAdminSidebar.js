@@ -127,7 +127,7 @@ const SuAdminSidebar = (props) => {
       </NavLink>
       <NavLink activeClassName="nav-active" to="/AttritionList">
         <img className="desktop-only" alt="Attrition" src={Attrition} />
-        <p className="min">Attrition list</p>
+        <p className="min">Attrition Details</p>
       </NavLink>
       <NavLink activeClassName="nav-active" to="/Notes">
         <img className="desktop-only" alt="Notes" src={Notes} />
