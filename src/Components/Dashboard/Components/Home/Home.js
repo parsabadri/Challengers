@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../../../Assets/Styles/Home.scss";
 import SmallPieChart from "./Components/SmallPieChart";
 import MultiBarChart from "./Components/MultiBarChart";
+import MobileMultiBarChart from "./Components/MobileMultiBarChart"; // mobile only
 import SimpleBarChar from "./Components/SimpleBarChart";
 import { BrowserRouter } from "react-router-dom";
 import AlertIcon from "../../../../Assets/Images/Icons/InfoSquare.svg";
@@ -10,6 +11,7 @@ import { config } from "../../../../config";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 const Home = (props) => {
+  const [IsMobile, setIsMobile] = useState(false); //Only to apply style changes on mobile devices(it is set in the useEffect hook)
   const [CompanyData, setCompData] = useState({
     name: "The BlaBla Company",
   });
@@ -69,6 +71,9 @@ const Home = (props) => {
       setIsFirstLogin(true);
     } else {
       setIsFirstLogin(false);
+    }
+    if (window.screen.width < 450) {
+      setIsMobile(true); // Changing state value in order to have device type
     }
     //each of these functions fetch chart data for each section (e.g. Company Attrition, Dept. attrition, etc.)
     getCompAttrition();
@@ -241,7 +246,7 @@ const Home = (props) => {
             <h2>Dashboard</h2>
             <p>{CompanyData.name}</p>
           </div>
-          <div className="flex">
+          <div className="flex mobile-pie-group">
             <div className="small-chart">
               <h2>Company Attrition</h2>
               {CompanyAttrition.chart_data.length === 0 ? (
@@ -360,8 +365,8 @@ const Home = (props) => {
               </div>
             </div>
           </div>
-          <div className="content">
-            <div className="flex">
+          <div className="content mobile-content">
+            <div className="flex mobile-center">
               <div className="inline-block">
                 <div className="flex">
                   <h2>Attrition by Age</h2>
@@ -379,7 +384,7 @@ const Home = (props) => {
                   </select>
                 </div>
               </div>
-              <div className="inline-block">
+              <div className="inline-block desktop-only">
                 <div className="flex">
                   <div className="yellow-circle"></div>
                   <p> {DeptAttrition.dataset_1.name} </p>
@@ -396,15 +401,33 @@ const Home = (props) => {
             </div>
             <div className="barchart-wrapper">
               <div className="flex">
-                <div>
-                  <h3>Age group</h3>
-                  <MultiBarChart data={AttritionByAge} />
-                </div>
-                <h3>people</h3>
+                <React.Fragment>
+                  <h3 className="desktop-only">Age group</h3>
+                  {IsMobile ? (
+                    <MobileMultiBarChart data={AttritionByAge} />
+                  ) : (
+                    <MultiBarChart data={AttritionByAge} />
+                  )}
+                </React.Fragment>
+                <h3 className="desktop-only">people</h3>
+              </div>
+            </div>
+            <div className="inline-block mobile-only mobile-chart-info">
+              <div className="flex">
+                <div className="yellow-circle"></div>
+                <p> {DeptAttrition.dataset_1.name} </p>
+              </div>
+              <div className="flex">
+                <div className="pink-circle"></div>
+                <p> {DeptAttrition.dataset_2.name} </p>
+              </div>
+              <div className="flex">
+                <div className="blue-circle"></div>
+                <p> {DeptAttrition.dataset_3.name} </p>
               </div>
             </div>
           </div>
-          <div className="content job-role">
+          <div className="content job-role desktop-only">
             <h2>Attrition by Job Role</h2>
             <div className="double-filters">
               <div className="filter">

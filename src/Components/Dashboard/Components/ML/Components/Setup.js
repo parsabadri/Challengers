@@ -88,7 +88,7 @@ const Setup = () => {
     }
   };
 
-  //the following 4 functions are called when a certain step of the ML setup is done and they update
+  //The following 4 functions are called when a certain step of the ML setup is done and they update
   //our current step state in component so the user will know which step they're on.
 
   //1
@@ -180,6 +180,7 @@ const Setup = () => {
             </div>
           </div>
           <span className="section-border-bottom"></span>
+          {/* This is the typical form of a conditional rendering in ReactJS */}
           {Progress.prediction === 0 ? null : (
             <React.Fragment>
               <DoPrediction

@@ -105,3 +105,8 @@ button:focus {
     display: unset;
   }
 }
+
+//mostly used for elements that are only needed to exist in DOM and not displayed
+.hidden {
+  display: none;
+}

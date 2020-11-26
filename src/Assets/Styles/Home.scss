@@ -207,5 +207,59 @@
     width: 100%;
     height: auto;
     padding: 5vh 0;
+    margin: 0;
+    .dashboard-header {
+      margin: 4% 2%;
+    }
+    .small-chart:first-child {
+      margin-left: 2%;
+    }
+  }
+  .mobile-pie-group {
+    width: 98%;
+    margin: 0 auto 10%;
+    overflow-x: scroll;
+  }
+  .home-wrapper {
+    .filter {
+      .sinlge-select {
+        margin-bottom: 6%;
+        width: 65%;
+      }
+    }
+    .mobile-content {
+      display: block;
+      margin: 2% auto;
+      width: 97%;
+    }
+    .content {
+      .mobile-chart-info {
+        width: 90% !important;
+        display: block;
+        margin: auto;
+      }
+      .barchart-wrapper {
+        max-width: 450px;
+        width: 97%;
+        .mobile-bar {
+          transform: rotate(90deg);
+        }
+        .recharts-surface {
+          height: 330px;
+          .recharts-cartesian-axis-tick {
+            width: 50px;
+          }
+        }
+      }
+      .mobile-center {
+        h2 {
+          text-align: center;
+          width: 100%;
+        }
+      }
+    }
+    .inline-block {
+      width: 100%;
+    }
   }
 }
