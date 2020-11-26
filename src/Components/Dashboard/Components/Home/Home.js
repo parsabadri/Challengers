@@ -20,6 +20,7 @@ const Home = (props) => {
     chart_data: [],
   });
   const [DeptAttrition, setDeptAttrition] = useState({
+    hasData: false,
     summaries: [],
     chart_data: [],
     dataset_1: [],
@@ -119,13 +120,16 @@ const Home = (props) => {
     axios(req)
       .then((res) => {
         console.log(res);
-        setDeptAttrition({
-          summaries: res.data.data.summaries,
-          chart_data: res.data.data.datas,
-          dataset_1: res.data.data.datas[0],
-          dataset_2: res.data.data.datas[1],
-          dataset_3: res.data.data.datas[2],
-        });
+        if (res.data.data.datas.length > 0) {
+          setDeptAttrition({
+            summaries: res.data.data.summaries,
+            chart_data: res.data.data.datas,
+            dataset_1: res.data.data.datas[0],
+            dataset_2: res.data.data.datas[1],
+            dataset_3: res.data.data.datas[2],
+            hasData: true,
+          });
+        }
       })
       .catch((err) => {
         console.log(err.response);
@@ -323,9 +327,15 @@ const Home = (props) => {
                   </div>
                 ) : (
                   <div className="flex">
-                    <div className="yellow-circle"></div>
-                    <p> {DeptAttrition.dataset_2.name} </p>
-                    <p> {DeptAttrition.dataset_2.value} </p>
+                    {DeptAttrition.hasData ? (
+                      <React.Fragment>
+                        <div className="yellow-circle"></div>
+                        <p> {DeptAttrition.dataset_2.name} </p>
+                        <p> {DeptAttrition.dataset_2.value} </p>
+                      </React.Fragment>
+                    ) : (
+                      <p className="small-info-centered">No Data!</p>
+                    )}
                   </div>
                 )}
                 {CompanyAttrition.chart_data.length === 0 ? (
@@ -340,9 +350,13 @@ const Home = (props) => {
                   </div>
                 ) : (
                   <div className="flex">
-                    <div className="pink-circle"></div>
-                    <p> {DeptAttrition.dataset_1.name} </p>
-                    <p> {DeptAttrition.dataset_1.value} </p>
+                    {DeptAttrition.hasData ? (
+                      <React.Fragment>
+                        <div className="pink-circle"></div>
+                        <p> {DeptAttrition.dataset_1.name} </p>
+                        <p> {DeptAttrition.dataset_1.value} </p>
+                      </React.Fragment>
+                    ) : null}
                   </div>
                 )}
                 {CompanyAttrition.chart_data.length === 0 ? (
@@ -357,9 +371,13 @@ const Home = (props) => {
                   </div>
                 ) : (
                   <div className="flex">
-                    <div className="blue-circle"></div>
-                    <p> {DeptAttrition.dataset_3.name} </p>
-                    <p> {DeptAttrition.dataset_3.value} </p>
+                    {DeptAttrition.hasData ? (
+                      <React.Fragment>
+                        <div className="blue-circle"></div>
+                        <p> {DeptAttrition.dataset_3.name} </p>
+                        <p> {DeptAttrition.dataset_3.value} </p>
+                      </React.Fragment>
+                    ) : null}
                   </div>
                 )}
               </div>
@@ -385,18 +403,24 @@ const Home = (props) => {
                 </div>
               </div>
               <div className="inline-block desktop-only">
-                <div className="flex">
-                  <div className="yellow-circle"></div>
-                  <p> {DeptAttrition.dataset_1.name} </p>
-                </div>
-                <div className="flex">
-                  <div className="pink-circle"></div>
-                  <p> {DeptAttrition.dataset_2.name} </p>
-                </div>
-                <div className="flex">
-                  <div className="blue-circle"></div>
-                  <p> {DeptAttrition.dataset_3.name} </p>
-                </div>
+                {DeptAttrition.hasData ? (
+                  <div className="flex">
+                    <div className="yellow-circle"></div>
+                    <p> {DeptAttrition.dataset_1.name} </p>
+                  </div>
+                ) : null}
+                {DeptAttrition.hasData ? (
+                  <div className="flex">
+                    <div className="pink-circle"></div>
+                    <p> {DeptAttrition.dataset_2.name} </p>
+                  </div>
+                ) : null}
+                {DeptAttrition.hasData ? (
+                  <div className="flex">
+                    <div className="blue-circle"></div>
+                    <p> {DeptAttrition.dataset_3.name} </p>
+                  </div>
+                ) : null}
               </div>
             </div>
             <div className="barchart-wrapper">
@@ -415,15 +439,15 @@ const Home = (props) => {
             <div className="inline-block mobile-only mobile-chart-info">
               <div className="flex">
                 <div className="yellow-circle"></div>
-                <p> {DeptAttrition.dataset_1.name} </p>
+                {/* <p> {DeptAttrition.dataset_1.name} </p> */}
               </div>
               <div className="flex">
                 <div className="pink-circle"></div>
-                <p> {DeptAttrition.dataset_2.name} </p>
+                {/* <p> {DeptAttrition.dataset_2.name} </p> */}
               </div>
               <div className="flex">
                 <div className="blue-circle"></div>
-                <p> {DeptAttrition.dataset_3.name} </p>
+                {/* <p> {DeptAttrition.dataset_3.name} </p> */}
               </div>
             </div>
           </div>

@@ -31,9 +31,12 @@ const TrainModel = (props) => {
         <div className="flex">
           <img className="file-icon" src={Modelicon} />
           <section className="file-details">
-            <p className="bold-info-text">Model ID: de6838253b28df33b4baa</p>
-            <p className="bold-info-text">Creation date: Nov 7,2020</p>
-            <p className="bold-info-text">File size: 300kb</p>
+            <p className="bold-info-text">
+              Elapsed Time: {props.TrainingResult.elapsed_time} S
+            </p>
+            <p className="bold-info-text">
+              Creation date: {props.TrainingResult.createdTime}
+            </p>
             <button
               onClick={() => props.RetrainModel()}
               className="change-data-btn"

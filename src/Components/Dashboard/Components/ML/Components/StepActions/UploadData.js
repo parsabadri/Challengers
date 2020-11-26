@@ -5,6 +5,7 @@ import { config } from "../../../../../../config";
 
 const UploadData = (props) => {
   const [CSVfile, setCSVfile] = useState({});
+  const [Action_type, setActionType] = useState(""); //Either add or replace data
   const [FileInfo, setFileInfo] = useState({
     file_size: "",
     uploaded_at: "",
@@ -26,7 +27,8 @@ const UploadData = (props) => {
   };
 
   //This function clicks the hidden input and works as an upload trigger
-  const trigUpload = () => {
+  const trigUpload = (action) => {
+    setActionType(action);
     document.getElementById("csv-file").click();
   };
 
@@ -46,29 +48,65 @@ const UploadData = (props) => {
   };
 
   const handleCSVupload = () => {
-    setCSVfile(document.getElementById("csv-file").files[0]);
     setCSVFileDetails();
-    handleUpload();
+    if (Action_type === "replace") {
+      handleReplaceData();
+    } else if (Action_type === "add") {
+      handleAddToData();
+    }
   };
 
   //This function uploads the csv file, then trigs the next step state
-  const handleUpload = () => {
+  const handleReplaceData = () => {
     let TrainData = new FormData();
-    TrainData.append("deleteExisting", "false");
-    TrainData.append("file", CSVfile);
+    TrainData.append("deleteExisting", true);
+    TrainData.append("file", document.getElementById("csv-file").files[0]);
 
     let req = {
       method: "POST",
       url: config.baseURL + "/rest/superadmin/dataset/import/train-data",
       headers: {
         Authorization: "Bearer " + window.localStorage.getItem("token"),
+        "Content-Type": "text/csv",
       },
       data: TrainData,
     };
     axios(req)
       .then((res) => {
         console.log(res);
-        props.ReplaceData();
+        if (res.data.code != 200) {
+          window.alert(res.data.message);
+        } else {
+          window.alert(res.data.message);
+          props.ReplaceData();
+        }
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+  const handleAddToData = () => {
+    let TrainData = new FormData();
+    TrainData.append("deleteExisting", false);
+    TrainData.append("file", document.getElementById("csv-file").files[0]);
+
+    let req = {
+      method: "POST",
+      url: config.baseURL + "/rest/superadmin/dataset/import/train-data",
+      headers: {
+        Authorization: "Bearer " + window.localStorage.getItem("token"),
+        "Content-Type": "multipart/form-data",
+      },
+      data: TrainData,
+    };
+    axios(req)
+      .then((res) => {
+        console.log(res);
+        if (res.data.code != 200) {
+          window.alert(res.data.message);
+        } else {
+          props.ReplaceData();
+        }
       })
       .catch((err) => {
         console.log(err.response);
@@ -86,7 +124,10 @@ const UploadData = (props) => {
           about the standard data format <a>here</a>.
         </p>
         <div className="flex">
-          <button onClick={() => trigUpload()} className="double-action-btn">
+          <button
+            onClick={() => trigUpload("replace")}
+            className="double-action-btn"
+          >
             Upload and replace
           </button>
           <input
@@ -96,7 +137,10 @@ const UploadData = (props) => {
             id="csv-file"
             onChange={() => handleCSVupload()}
           />
-          <button onClick={() => trigUpload()} className="double-action-btn">
+          <button
+            onClick={() => trigUpload("add")}
+            className="double-action-btn"
+          >
             Upload and add to current data
           </button>
         </div>

@@ -5,9 +5,11 @@ import UploadData from "./StepActions/UploadData";
 import TrainModel from "./StepActions/TrainModel";
 import PredictionData from "./StepActions/PredictionData";
 import DoPrediction from "./StepActions/DoPrediction";
+import { config } from "../../../../../config";
+import axios from "axios";
 
 // A littile note about how step states and classes are handled:
-//all steps have a state update value (i.e. a name in the Progress State of the component)
+//all steps have a state update value (i.e. a name in the "Progress" State of the component)
 //and they have 3 states:
 //0: not initiated, not ongoing
 //1: initiated and ongoing
@@ -25,12 +27,27 @@ const Setup = () => {
     prediction_data: 0,
     prediction: 0,
   });
+  const [TrainingResult, setTrainingResult] = useState([]);
 
   useEffect(() => {
     updateStepStates();
   }, [Progress]);
   //this function runs 4 other functions and updates the state of our steps based on their value
   const updateStepStates = () => {
+    let req = {
+      method: "GET",
+      url: config.baseURL + "/rest/superadmin/dataset/getStatusLog",
+      headers: {
+        Authorization: "Bearer " + window.localStorage.getItem("token"),
+      },
+    };
+    axios(req)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     updateDataUploadState();
     updateTrainModelState();
     updatePredictionDataState();
@@ -97,14 +114,27 @@ const Setup = () => {
     document.getElementById("training-btn").style.pointerEvents = "none";
     document.getElementById("training-btn").style.backgroundColor =
       "rgba(127, 53, 254, 0.7)";
-    setTimeout(() => {
-      setProgress({
-        data: 2,
-        training: 2,
-        prediction_data: 1,
-        prediction: 0,
+    let req = {
+      method: "GET",
+      url: config.baseURL + "/rest/superadmin/dataset/process/train-data",
+      headers: {
+        Authorization: "Bearer " + window.localStorage.getItem("token"),
+      },
+    };
+    axios(req)
+      .then((res) => {
+        console.log(res);
+        setTrainingResult(res.data.data);
+        setProgress({
+          data: 2,
+          training: 2,
+          prediction_data: 1,
+          prediction: 0,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    }, 3000);
   };
   //2
   const ReplaceData = () => {
@@ -130,14 +160,28 @@ const Setup = () => {
     document.getElementById("training-btn").style.pointerEvents = "none";
     document.getElementById("training-btn").style.backgroundColor =
       "rgba(127, 53, 254, 0.7)";
-    setTimeout(() => {
-      setProgress({
-        data: 2,
-        training: 2,
-        prediction_data: 2,
-        prediction: 2,
+    let req = {
+      method: "GET",
+      url:
+        config.baseURL +
+        "/rest/superadmin/dataset/process/prediction-data?isNewModel=false",
+      headers: {
+        Authorization: "Bearer " + window.localStorage.getItem("token"),
+      },
+    };
+    axios(req)
+      .then((res) => {
+        console.log(res);
+        setProgress({
+          data: 2,
+          training: 2,
+          prediction_data: 2,
+          prediction: 2,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    }, 3000);
   };
   // This function changes Uploaded training data, also Progress state object is updated
   // in this function. This function is passed to the Child Component as props
@@ -205,6 +249,7 @@ const Setup = () => {
             <React.Fragment>
               <TrainModel
                 state_status={Progress.training}
+                TrainingResult={TrainingResult}
                 handleStartTrain={() => handleStartTrain()}
                 RetrainModel={() => RetrainModel()}
               />

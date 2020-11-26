@@ -6,6 +6,10 @@
   width: 77%;
   margin: 0 0 0 3%;
   height: 100vh;
+  .small-info-centered {
+    text-align: center;
+    width: 92%;
+  }
   .dashboard-header {
     color: $dark-blue-primary;
     margin: 4% 0;
