@@ -58,6 +58,7 @@ const PredictionData = (props) => {
 
   //This function uploads the csv file, then trigs the next step state
   const handleReplaceData = () => {
+    document.getElementById("replace-btn").innerHTML = "Uploading...";
     let TrainData = new FormData();
     TrainData.append("deleteExisting", true);
     TrainData.append(
@@ -89,6 +90,7 @@ const PredictionData = (props) => {
       });
   };
   const handleAddToData = () => {
+    document.getElementById("add-btn").innerHTML = "Uploading...";
     let TrainData = new FormData();
     TrainData.append("deleteExisting", false);
     TrainData.append(
@@ -131,6 +133,7 @@ const PredictionData = (props) => {
           <button
             onClick={() => trigUpload("replace")}
             className="double-action-btn"
+            id="replace-btn"
           >
             Upload and replace
           </button>
@@ -144,6 +147,7 @@ const PredictionData = (props) => {
           <button
             onClick={() => trigUpload("add")}
             className="double-action-btn"
+            id="add-btn"
           >
             Upload and add to current data
           </button>
@@ -165,12 +169,12 @@ const PredictionData = (props) => {
               Upload date: {FileInfo.uploaded_at}
             </p>
             <p className="bold-info-text">File size: {FileInfo.file_size}</p>
-            <button
+            {/* <button
               onClick={() => props.ChangePredictionData()}
               className="change-data-btn"
             >
               Change prediction data
-            </button>
+            </button> */}
           </section>
         </div>
       </section>

@@ -37,7 +37,11 @@ const SuAdminSidebar = (props) => {
       document.getElementById("sidebar").style.transitionDelay = "0";
       document.getElementById("sidebar").style.width = "291px";
       document.getElementById("minimize-icon").style.transform = "none";
-      document.getElementById("sidebar").classList.remove("sidebar-minimiezd");
+      setTimeout(() => {
+        document
+          .getElementById("sidebar")
+          .classList.remove("sidebar-minimiezd");
+      }, 280);
     }
   };
   //the following two functions handle navbar open and close on mobile devices

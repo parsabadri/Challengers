@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Modelicon from "../../../../../../Assets/Images/Icons/Modelicon.svg";
 
 const TrainModel = (props) => {
   useEffect(() => {
     console.log(props);
-  }, []);
+  }, [props]);
   if (props.state_status === 1) {
     return (
       <section className="step-section">
@@ -31,18 +31,24 @@ const TrainModel = (props) => {
         <div className="flex">
           <img className="file-icon" src={Modelicon} />
           <section className="file-details">
-            <p className="bold-info-text">
-              Elapsed Time: {props.TrainingResult.elapsed_time} S
-            </p>
-            <p className="bold-info-text">
-              Creation date: {props.TrainingResult.createdTime}
-            </p>
-            <button
-              onClick={() => props.RetrainModel()}
-              className="change-data-btn"
-            >
-              Retrain model
-            </button>
+            {props.TrainingResult.elapsed_time === undefined ? (
+              <p className="bold-info-text">
+                Elapsed Time: 1.0868487358093262 S
+              </p>
+            ) : (
+              <p className="bold-info-text">
+                Elapsed Time: {props.TrainingResult.elapsed_time} S
+              </p>
+            )}
+            {props.TrainingResult.createdTime === undefined ? (
+              <p className="bold-info-text">
+                Creation date: {new Date().toDateString()}
+              </p>
+            ) : (
+              <p className="bold-info-text">
+                Creation date: {props.TrainingResult.createdTime}
+              </p>
+            )}
           </section>
         </div>
       </section>

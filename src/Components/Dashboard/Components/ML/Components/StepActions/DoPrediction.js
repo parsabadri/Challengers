@@ -8,7 +8,7 @@ const DoPrediction = (props) => {
         <h2 className="step-title">4. Do the prediction</h2>
         <p className="info-text">
           The prediction will be done based on trained model and your uploaded
-          prediction data file. Please be patient this process could be take
+          prediction data file. Please be patient this process could take
           several minutes.
         </p>
 
@@ -30,17 +30,15 @@ const DoPrediction = (props) => {
         <div className="flex">
           <img className="file-icon" src={FileIcon} />
           <section className="file-details">
-            <a href="" className="bold-info-text report-link">
+            <a
+              href=""
+              onClick={() => document.getElementById("home-link").click()}
+              className="bold-info-text report-link"
+            >
               View prediction report
             </a>
             <p className="bold-info-text">Creation date: Nov 7,2020</p>
             <p className="bold-info-text">File size: 300kb</p>
-            <button
-              onClick={() => props.Repredict()}
-              className="change-data-btn"
-            >
-              Predict again
-            </button>
           </section>
         </div>
       </section>

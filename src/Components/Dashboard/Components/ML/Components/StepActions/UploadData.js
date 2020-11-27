@@ -16,8 +16,16 @@ const UploadData = (props) => {
     if (document.getElementById("csv-file") != null) {
       //we have to make sure the element is not null, then get the file
       getCSVfile();
+      if (props.Existing_file.file_name !== null) {
+        setFileInfo({
+          file_name: props.Existing_file.file_name,
+          file_size: props.Existing_file.file_size,
+          uploaded_at: props.Existing_file.upload_date,
+        });
+        console.log(props);
+      }
     }
-  }, [CSVfile]);
+  }, [CSVfile, props]);
 
   // The function below sets the new file in state as an object, in case the user updates the file again,
   // the function is called as a result of passinc the CSVfile state to the hook. The result is that we
@@ -28,7 +36,7 @@ const UploadData = (props) => {
 
   //This function clicks the hidden input and works as an upload trigger
   const trigUpload = (action) => {
-    setActionType(action);
+    setActionType(action); // action is either add to data or replace training data
     document.getElementById("csv-file").click();
   };
 
@@ -58,6 +66,7 @@ const UploadData = (props) => {
 
   //This function uploads the csv file, then trigs the next step state
   const handleReplaceData = () => {
+    document.getElementById("replace-btn").innerHTML = "Uploading...";
     let TrainData = new FormData();
     TrainData.append("deleteExisting", true);
     TrainData.append("file", document.getElementById("csv-file").files[0]);
@@ -76,8 +85,12 @@ const UploadData = (props) => {
         console.log(res);
         if (res.data.code != 200) {
           window.alert(res.data.message);
+          document.getElementById("replace-btn").innerHTML =
+            "Upload and replace";
         } else {
           window.alert(res.data.message);
+          document.getElementById("replace-btn").innerHTML =
+            "Upload and replace";
           props.ReplaceData();
         }
       })
@@ -86,6 +99,7 @@ const UploadData = (props) => {
       });
   };
   const handleAddToData = () => {
+    document.getElementById("add-btn").innerHTML = "Uploading...";
     let TrainData = new FormData();
     TrainData.append("deleteExisting", false);
     TrainData.append("file", document.getElementById("csv-file").files[0]);
@@ -104,8 +118,12 @@ const UploadData = (props) => {
         console.log(res);
         if (res.data.code != 200) {
           window.alert(res.data.message);
+          document.getElementById("replace-btn").innerHTML =
+            "Upload and add to current data";
         } else {
           props.ReplaceData();
+          document.getElementById("replace-btn").innerHTML =
+            "Upload and add to current data";
         }
       })
       .catch((err) => {
@@ -120,12 +138,12 @@ const UploadData = (props) => {
       <section className="step-section">
         <h2 className="step-title">1. Upload the training data</h2>
         <p className="info-text">
-          Please upload your training data in a proper csv format. Learn more
-          about the standard data format <a>here</a>.
+          Please upload your training data in a proper csv format.
         </p>
         <div className="flex">
           <button
             onClick={() => trigUpload("replace")}
+            id="replace-btn"
             className="double-action-btn"
           >
             Upload and replace
@@ -139,6 +157,7 @@ const UploadData = (props) => {
           />
           <button
             onClick={() => trigUpload("add")}
+            id="add-btn"
             className="double-action-btn"
           >
             Upload and add to current data
@@ -156,16 +175,8 @@ const UploadData = (props) => {
             <p className="bold-info-text">
               Data file name: {FileInfo.file_name}
             </p>
-            <p className="bold-info-text">
-              Upload date: {FileInfo.uploaded_at}
-            </p>
+            <p className="bold-info-text">Upload at: {FileInfo.uploaded_at}</p>
             <p className="bold-info-text">File size: {FileInfo.file_size}</p>
-            <button
-              onClick={() => props.ChangeTrainingData()}
-              className="change-data-btn"
-            >
-              Change training data
-            </button>
           </section>
         </div>
       </section>

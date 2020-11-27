@@ -28,11 +28,25 @@ const Setup = () => {
     prediction: 0,
   });
   const [TrainingResult, setTrainingResult] = useState([]);
+  const [PrevTrainFile, setPrevTrainingFile] = useState({
+    file_name: "",
+    upload_date: "",
+    file_size: "",
+  }); //for storing previously uploaded train file info
+  const [PrevPredictionFile, setPrevPredFile] = useState({
+    upload_date: "",
+    elapsed_time: "",
+  }); //for storing previously uploaded prediction file info
 
   useEffect(() => {
     updateStepStates();
-  }, [Progress]);
-  //this function runs 4 other functions and updates the state of our steps based on their value
+  }, [
+    Progress.data,
+    // Progress.prediction,
+    Progress.training,
+    Progress.prediction_data,
+  ]);
+  //this function runs 4 other functions and updates the state of our steps based on their value and sets previous file info
   const updateStepStates = () => {
     let req = {
       method: "GET",
@@ -44,14 +58,66 @@ const Setup = () => {
     axios(req)
       .then((res) => {
         console.log(res);
+        let Status = res.data.data.status;
+        let ProcessType = res.data.data.details[0].processType; // most recently done action (the last complete step)
+        if (Status === "INCOMPLETE") {
+          if (ProcessType === "UPLOAD_TRAIN_DATA") {
+            setPrevTrainingFile({
+              //most recently uploaded Train file when steps were left incomplete
+              file_name: res.data.data.details[0].importLog.fileName,
+              file_size: res.data.data.details[0].importLog.fileSize,
+              upload_date: res.data.data.details[0].importLog.createdTime,
+            });
+            setUploadDone();
+            updateDataUploadState();
+            updateTrainModelState();
+            updatePredictionDataState();
+            updatePredictionState();
+            setPrevTrainingFile(res.data.data.details[0].importLog);
+          } else if (ProcessType === "PROCESS_TRAIN_DATA") {
+            setTrainDone();
+            updateDataUploadState();
+            updateTrainModelState();
+            updatePredictionDataState();
+            updatePredictionState();
+          } else if (ProcessType === "UPLOAD_PREDICTION_DATA") {
+            setPredictionDataDone();
+            updateDataUploadState();
+            updateTrainModelState();
+            updatePredictionDataState();
+            updatePredictionState();
+          }
+        }
       })
       .catch((err) => {
         console.log(err);
       });
-    updateDataUploadState();
-    updateTrainModelState();
-    updatePredictionDataState();
-    updatePredictionState();
+  };
+
+  // These functions only change the UI depending on which step the user left the setup
+  const setUploadDone = () => {
+    setProgress({
+      data: 2,
+      training: 1,
+      prediction_data: 0,
+      prediction: 0,
+    });
+  };
+  const setTrainDone = () => {
+    setProgress({
+      data: 2,
+      training: 2,
+      prediction_data: 1,
+      prediction: 0,
+    });
+  };
+  const setPredictionDataDone = () => {
+    setProgress({
+      data: 2,
+      training: 2,
+      prediction_data: 2,
+      prediction: 1,
+    });
   };
 
   //the following four functions update every step state based on current status of the training progrss
@@ -198,11 +264,12 @@ const Setup = () => {
     setProgress({ data: 2, training: 2, prediction_data: 1, prediction: 0 });
   };
   const Repredict = () => {
-    setProgress({ data: 2, training: 2, prediction_data: 2, prediction: 1 });
+    setProgress({ data: 2, training: 2, prediction_data: 2, prediction: 2 });
   };
+
   return (
     <BrowserRouter basename="/ML">
-      <div className="content-wrapper">
+      <div className="content-wrapper" id="content-wrapper">
         <h1>ML Setup</h1>
         <div className="content">
           <div className="progress">
@@ -250,6 +317,7 @@ const Setup = () => {
               <TrainModel
                 state_status={Progress.training}
                 TrainingResult={TrainingResult}
+                Existing_file={PrevPredictionFile}
                 handleStartTrain={() => handleStartTrain()}
                 RetrainModel={() => RetrainModel()}
               />
@@ -258,6 +326,7 @@ const Setup = () => {
           )}
           <UploadData
             state_status={Progress.data}
+            Existing_file={PrevTrainFile}
             ReplaceData={() => ReplaceData()}
             ChangeTrainingData={() => ChangeTrainingData()}
           />
